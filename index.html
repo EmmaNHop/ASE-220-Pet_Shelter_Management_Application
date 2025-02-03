@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head><script src="assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A Pet Shelter page to adopt cute pets!">
+    <meta name="author" content="Nate Brewer, Danny Poff, and Emma Hopkins">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Pet Shelter - Nate Brewer, Danny Poff, Emma Hopkins</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+
+        <!-- STYLE SHEET -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
+
+  </head>
+  <body>
+
+        <!-- Nav Bar -->
+    <header data-bs-theme="dark">
+      <div class="collapse text-bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4>About</h4>
+              <p class="text-body-secondary">This is a pet shelter website to make sure pets can get adopted and into a loving home</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4>Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                <li><a href="#" class="text-white">Like on Facebook</a></li>
+                <li><a href="#" class="text-white">Email me</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <strong>Pet Shelter ™</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+      <!-- End Nav Bar -->
+
+      <!-- Main -->
+    <main>
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Pets</h1>
+            <p class="lead text-body-secondary">Below are pets that are up for adoption, I think.</p>
+          </div>
+        </div>
+      </section>
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+          <!-- This is where the javascript HTML will be placed-->
+          <div id="petThumbnail" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <footer class="py-5 bg-dark text-white">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <p class="mb-1">By Danny Poff, Nate Brewer, and Emma Hopkins</p></div>
+    </footer>
+
+    <script src="/assets/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    <!-- Where the json data is and functions -->
+    <script src="./assets/js/pets.js"></script>
+    <script>
+  
+
+      function displayHtml(html){
+        document.querySelector('#petThumbnail').innerHTML = html;
+      }
+
+      var hardCodePets = getAllJsonData();
+
+
+      let html ='';
+
+      for(let i = 0; i < 6; i++) {
+
+        let cardColor;
+
+        
+        if(hardCodePets[i].Sex == "Female"){
+          cardColor = '#FDC5F5';
+        }
+        else if(hardCodePets[i].Sex == "Male"){
+          cardColor = '#6EEDEB';
+        } else {
+          cardColor = '#ADADAD';
+        }
+
+        let htmlSegment =
+          `<div class="col">
+            <a href="detailPage.html?id=${i}" style="text-decoration: none;">
+              <div class="card shadow-sm" style="background-color: ${cardColor};">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                  <image width="100%" height="100%" href="${hardCodePets[i].Pic}" alt="${hardCodePets[i].Name} the ${hardCodePets[i].Type}" />
+                  
+                </svg>
+
+                <div class="card-body">
+                  <p class="card-text" >${hardCodePets[i].Bio}</p>
+                  <br/>
+                  <p>Information about this animal</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-dark">${hardCodePets[i].Name}</button>
+                      <button type="button" class="btn btn-sm btn-outline-dark">${hardCodePets[i].Type}</button>
+                    </div>
+                    <small class="text-muted">${hardCodePets[i].Age} years old</small>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>`;
+
+        html += htmlSegment;
+
+      }
+      displayHtml(html);
+
+    </script>
+  </body>
+</html>
