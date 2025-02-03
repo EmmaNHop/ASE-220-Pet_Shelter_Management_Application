@@ -12,12 +12,13 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 
         <!-- STYLE SHEET -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
     <style>
       .bd-placeholder-img {
@@ -99,10 +100,10 @@
     </style>
 
   </head>
-  <body>
+  <body data-bs-theme="dark">
 
         <!-- Nav Bar -->
-    <header data-bs-theme="dark">
+    <header>
       <div class="collapse text-bg-dark" id="navbarHeader">
         <div class="container">
           <div class="row">
@@ -121,7 +122,7 @@
           </div>
         </div>
       </div>
-      <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="navbar shadow">
         <div class="container">
           <a href="#" class="navbar-brand d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
@@ -157,11 +158,18 @@
     </main>
 
     <footer class="py-5 bg-dark text-white">
-      <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">By Danny Poff, Nate Brewer, and Emma Hopkins</p></div>
+      <div class="d-flex justify-content-center container">
+        
+        
+        <div class="text-center">
+          <p class="mb-0">© 2021 Pet Shelter ™</p>
+          <div class="mb-1">Danny Poff • Nate Brewer • Emma Hopkins</div>
+          <div class="mb-1">
+            <a href="#">Back to top</a>
+          </div>
+        </div>
+      </div>
+        
     </footer>
 
     <script src="/assets/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -186,34 +194,46 @@
 
         
         if(hardCodePets[i].Sex == "Female"){
-          cardColor = '#FDC5F5';
+          //cardColor = '#FDC5F5';
+          cardIcon = `<i class="bi bi-gender-female h1"></i>`;
         }
         else if(hardCodePets[i].Sex == "Male"){
-          cardColor = '#6EEDEB';
+          //cardColor = '#6EEDEB';
+          cardIcon = `<i class="bi bi-gender-male h1"></i>`;
         } else {
-          cardColor = '#ADADAD';
+          //cardColor = '#ADADAD';
+          cardIcon = `<i class="bi bi-question-circle h1"></i>`; 
         }
 
         let htmlSegment =
           `<div class="col">
             <a href="detailPage.html?id=${i}" style="text-decoration: none;">
-              <div class="card shadow-sm" style="background-color: ${cardColor};">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <image width="100%" height="100%" href="${hardCodePets[i].Pic}" alt="${hardCodePets[i].Name} the ${hardCodePets[i].Type}" />
-                  
-                </svg>
+              <div class="card shadow border " /*style="background-color: ${cardColor};" style="background-color:#5c5b5b"*/>
+                <div class=" m-4 mb-0">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <image class="rounded" width="100%" height="100%" href="${hardCodePets[i].Pic}" alt="${hardCodePets[i].Name} the ${hardCodePets[i].Type}" / >
 
-                <div class="card-body">
-                  <p class="card-text" >${hardCodePets[i].Bio}</p>
-                  <br/>
-                  <p>Information about this animal</p>
+                  </svg>
+                </div>
+
+                <div class="card-body mt-0 pt-0">
+                  <!--<p class="card-text" >${hardCodePets[i].Bio}</p>-->
+                  
+                  <!--<p>Information about this animal</p>-->
                   <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-dark">${hardCodePets[i].Name}</button>
-                      <button type="button" class="btn btn-sm btn-outline-dark">${hardCodePets[i].Type}</button>
-                    </div>
-                    <small class="text-muted">${hardCodePets[i].Age} years old</small>
+                    <strong class="text-body-primary">${hardCodePets[i].Name}</strong>
+                    <strong>${cardIcon}</strong>
                   </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted">${hardCodePets[i].Type}</small>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted">${hardCodePets[i].Age} years old</small>
+                  </div>
+                  
+                    
+                    
+                  
                 </div>
               </div>
             </a>
