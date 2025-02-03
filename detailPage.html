@@ -11,11 +11,11 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="assets/css/detailStyles.css" rel="stylesheet" />
-        <script type="text/javascript" src="pets.json"></script>
+        <script type="text/javascript" src="./assets/js/pets.js"></script>
     </head>
-    <body>
+    <body class="bg-dark text-white">
         <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
             <div class="container">
                 <a class="navbar-brand" href="#!">Pet Page</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -35,32 +35,69 @@
                         <!-- Post header-->
                         <header class="mb-4">
                             <!--Name of animal-->
-                            <h1 class="fw-bolder mb-1">NAME!</h1>
+                            <h1 class="fw-bolder mb-1" id="name"></h1>
                             <!-- Maybe deal with post date, would need another section in pets data or something-->
-                            <div class="text-muted fst-italic mb-2">Posted on ...</div>
+                            <div class="text-muted fst-italic mb-2">Posted on <span class="small" id="date"></span></div>
                             <!-- Animal Type-->
-                            <a class="badge bg-secondary text-decoration-none link-light" href="#!">Animal</a>
+                            
                         </header>
                         <!-- Preview image figure-->
-                        <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+                        <figure class="mb-4 shadow border rounded border-2 border-secondary"><img class="img-fluid rounded" id="picture" alt="..." /></figure>
                     </article>
                 </div>
                 <!-- Side widgets-->
-                <div class="col-lg-6">
+                <div class="col-lg-6 ">
                     <!-- Bio-->
-                    <section class="mb-5">
-                        <p>This is the Bio</p>
-                    </section>
+                    <div class="card mb-4 bg-dark text-white border-secondary border-2 shadow">
+                        <div class="small m-3" id="bio"></div>
+                    </div>
                     <!-- Side widget-->
-                    <div class="card mb-4">
-                        <div class="card-header">Side Widget</div>
-                        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                    <div class="card mb-4 bg-dark text-white border-secondary border-2 shadow">
+                        <div class="card-header">Description</div>
+                        <div class="card-body m-1">
+                            
+                            <table class="table mb-0 text-white border-secondary">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Animal:</th>
+                                        <td class="small" id="type"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Breed:</th>
+                                        <td class="small" id="breed"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Gender:</th>
+                                        <td class="small" id="sex"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Age:</th>
+                                        <td class="small" id="age"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Color:</th>
+                                        <td class="small" id="color"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Spayed/Neutered:</th>
+                                        <td class="small" id="sn"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Health:</th>
+                                        <td class="small" id="stat"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+
+                        
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
+        <footer class="py-5 bg-dark ">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Pet Shelter ™ 2025</p></div>
         </footer>
 
@@ -75,10 +112,47 @@
 
             // From pets.js
             var petData = getPetData(myParam);
-
+           
+            
             
             // Just to help expedite the process for ya
             let petName = petData.Name;
+            let petType = petData.Type;
+            let petBreed = petData.Breed;
+            let petSex = petData.Sex;
+            let petAge = petData.Age;
+            let petColor = petData.Color;
+            let petBio = petData.Bio;
+            let petPic = petData.Pic;
+            let petSN = petData.SpayedNeutured;
+            let petStat = petData.status;
+            let petDate = petData.DatePosted;
+            
+
+
+            var img = document.createElement("img");
+            img.src = petPic;
+
+            // This will change the image to the pet picture
+            document.getElementById("picture").src = petPic;
+            
+
+            // This will change the HTML to the pet data
+            document.getElementById("name").innerHTML = petName;
+            document.getElementById("date").innerHTML = petDate;
+            document.getElementById("type").innerHTML = petType;
+            document.getElementById("breed").innerHTML = petBreed;
+            document.getElementById("bio").innerHTML = petBio;
+            document.getElementById("sex").innerHTML = petSex;
+            document.getElementById("age").innerHTML = petAge;
+            document.getElementById("color").innerHTML = petColor;
+            document.getElementById("sn").innerHTML = petSN;
+            for(let i = 0; i < petStat.length; i++){
+                document.getElementById("stat").innerHTML += petStat[i] + "<br>";
+            }
+            
+            
+            
 
                 
         </script>
