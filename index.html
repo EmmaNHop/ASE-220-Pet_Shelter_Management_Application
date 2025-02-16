@@ -144,8 +144,68 @@
             <h1 class="fw-light">Pets</h1>
             <p class="lead text-body-secondary">Below are pets that are up for adoption, I think.</p>
           </div>
+            <div class="d-flex justify-content-end align-content-center">
+              <button type="button" id="create" data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary">Create</button>
+            </div>
         </div>
       </section>
+
+      <!--create Modal-->
+      <div class="modal fade" id="createModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Pet Information</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input class="form-control" type="text" name="task" placeholder="Enter name" />
+                <input class="form-control" type="text" name="task" placeholder="Enter Picture URL" />
+                <input class="form-control" type="text" name="task" placeholder="Enter Breed" />
+                <input class="form-control" type="text" name="task" placeholder="Enter type of animal" />
+                <input class="form-control" type="text" name="task" placeholder="Enter the animal's sex" />
+                <input class="form-control" type="text" name="task" placeholder="Enter animal's color" />
+                <input class="form-control" type="text" name="task" placeholder="Answer Yes or No for Spayed/Neutered" />
+                <input class="form-control" type="text" name="task" placeholder="Enter age" />
+                <input class="form-control" type="text" name="task" placeholder="Enter microchip number" />
+                <input class="form-control" type="text" name="task" placeholder="Enter status" />
+                <input class="form-control" type="text" name="task" placeholder="Enter bio" />
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <!--save info into pets.js, will have to add id and data ourselves. Status may need to be broken up somehow-->
+            <button id="btn-task-save" type="button" class="btn btn-primary"data-bs-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!--display Modal-->
+    <div class="modal fade" id="displayModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h1 class="modal-title fs-5" id="petName"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="petColor">color: </p>
+            <p id="breed">Breed: </p>
+            <p id="sex">Sex: </p>
+
+            <p id="bio">Bio: </p>
+            
+
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="btn-delete" type="button" class="btn btn-danger"data-bs-dismiss="modal">Delete</button>
+          </div>
+      </div>
+      </div>
+  </div>
+
+
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
 
@@ -156,7 +216,7 @@
         </div>
           <br />
           <div class="d-flex justify-content-center align-content-center">
-            <button type="button" id="loadMore" class="btn btn-secondary center">Load more</button>
+            <button type="button" id="loadMore" class="btn btn-secondary">Load more</button>
           </div>
       </div>
     </main>
@@ -176,7 +236,8 @@
         
     </footer>
 
-    <script src="/assets/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--changed the SHA because it was causing an error. If this change causes no other problems, remove this comment-->
+    <script src="/assets/js/bootstrap.bundle.min.js" integrity="sha384-HZYy7/e2t5ulY6HtYcKY7AWRuIBuyk3YMY+jfKGECq5pbYjpOnD+SSNz14RIH6F7" crossorigin="anonymous"></script>
 
     <!-- Where the json data is and functions -->
     <script src="./assets/js/pets.js"></script>
@@ -186,6 +247,20 @@
       var hardCodePets = getAllJsonData();
       var allPets = hardCodePets.length;
 
+      //display pet info to displayModal
+      document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        var recipient = button.getAttribute('data-bs-whatever')
+
+        document.querySelector('#petName').innerText = hardCodePets[recipient].Name;
+        document.querySelector('#petColor').innerText = 'Color: ' + hardCodePets[recipient].Color;
+        document.querySelector('#breed').innerText = 'Breed: ' + hardCodePets[recipient].Breed;
+        document.querySelector('#sex').innerText = 'Sex: ' + hardCodePets[recipient].Sex;
+        document.querySelector('#bio').innerText = 'Bio: ' + hardCodePets[recipient].Bio;
+
+      });
+
+      //loads more content
       document.querySelector('#loadMore').addEventListener('click', function() {
         loaded +=9;
         document.querySelector('#petThumbnail').innerHTML += load();
@@ -199,8 +274,10 @@
         let html ='';
 
         for(let i = loaded; i < loaded+9; i++) {
-          //stops programm from reading too far and causing errors before printing
+          //stops programm from reading too far and causing errors before printing.
+          //Also hides button
           if(i >= allPets) {
+            document.querySelector('#loadMore').style.display = "none";
             break;
           }
 
@@ -219,8 +296,8 @@
           }
 
           let htmlSegment =
-            `<div class="col">
-              <a href="detailPage.html?id=${i}" style="text-decoration: none;">
+            `<div class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever=${i}>
+              <!--<a href="detailPage.html?id=${i}" style="text-decoration: none;">-->
                 <div class="card shadow border " /*style="background-color: ${cardColor};" style="background-color:#5c5b5b"*/>
                   <div class=" m-4 mb-0">
                     <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -243,7 +320,7 @@
                     </div>
                   </div>
                 </div>
-              </a>
+              <!--</a>-->
             </div>`;
 
           html += htmlSegment;
