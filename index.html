@@ -195,7 +195,7 @@
 
             <p id="bio">Bio: </p>
             
-
+            <a id="petPage" href="">View page</a>
           </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -250,13 +250,14 @@
       //display pet info to displayModal
       document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget
-        var recipient = button.getAttribute('data-bs-whatever')
+        var pet = button.getAttribute('data-bs-whatever')
 
-        document.querySelector('#petName').innerText = hardCodePets[recipient].Name;
-        document.querySelector('#petColor').innerText = 'Color: ' + hardCodePets[recipient].Color;
-        document.querySelector('#breed').innerText = 'Breed: ' + hardCodePets[recipient].Breed;
-        document.querySelector('#sex').innerText = 'Sex: ' + hardCodePets[recipient].Sex;
-        document.querySelector('#bio').innerText = 'Bio: ' + hardCodePets[recipient].Bio;
+        document.querySelector('#petName').innerText = hardCodePets[pet].Name;
+        document.querySelector('#petColor').innerText = 'Color: ' + hardCodePets[pet].Color;
+        document.querySelector('#breed').innerText = 'Breed: ' + hardCodePets[pet].Breed;
+        document.querySelector('#sex').innerText = 'Sex: ' + hardCodePets[pet].Sex;
+        document.querySelector('#bio').innerText = 'Bio: ' + hardCodePets[pet].Bio;
+        document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + pet + '">View page</a>';
 
       });
 
