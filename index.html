@@ -154,6 +154,10 @@
           </div>
 
         </div>
+          <br />
+          <div class="d-flex justify-content-center align-content-center">
+            <button type="button" id="loadMore" class="btn btn-secondary center">Load more</button>
+          </div>
       </div>
     </main>
 
@@ -178,71 +182,75 @@
     <script src="./assets/js/pets.js"></script>
     <script>
   
+      var loaded = 0;
+      var hardCodePets = getAllJsonData();
+      var allPets = hardCodePets.length;
+
+      document.querySelector('#loadMore').addEventListener('click', function() {
+        loaded +=9;
+        document.querySelector('#petThumbnail').innerHTML += load();
+      });
 
       function displayHtml(html){
         document.querySelector('#petThumbnail').innerHTML = html;
       }
 
-      var hardCodePets = getAllJsonData();
+      function load() {
+        let html ='';
 
+        for(let i = loaded; i < loaded+9; i++) {
+          //stops programm from reading too far and causing errors before printing
+          if(i >= allPets) {
+            break;
+          }
 
-      let html ='';
+          let cardColor;
 
-      for(let i = 0; i < 6; i++) {
+          if(hardCodePets[i].Sex == "Female"){
+            //cardColor = '#FDC5F5';
+            cardIcon = `<i class="bi bi-gender-female h1"></i>`;
+          }
+          else if(hardCodePets[i].Sex == "Male"){
+            //cardColor = '#6EEDEB';
+            cardIcon = `<i class="bi bi-gender-male h1"></i>`;
+          } else {
+            //cardColor = '#ADADAD';
+            cardIcon = `<i class="bi bi-question-circle h1"></i>`; 
+          }
 
-        let cardColor;
-
-        
-        if(hardCodePets[i].Sex == "Female"){
-          //cardColor = '#FDC5F5';
-          cardIcon = `<i class="bi bi-gender-female h1"></i>`;
-        }
-        else if(hardCodePets[i].Sex == "Male"){
-          //cardColor = '#6EEDEB';
-          cardIcon = `<i class="bi bi-gender-male h1"></i>`;
-        } else {
-          //cardColor = '#ADADAD';
-          cardIcon = `<i class="bi bi-question-circle h1"></i>`; 
-        }
-
-        let htmlSegment =
-          `<div class="col">
-            <a href="detailPage.html?id=${i}" style="text-decoration: none;">
-              <div class="card shadow border " /*style="background-color: ${cardColor};" style="background-color:#5c5b5b"*/>
-                <div class=" m-4 mb-0">
-                  <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <image class="rounded" width="100%" height="100%" href="${hardCodePets[i].Pic}" alt="${hardCodePets[i].Name} the ${hardCodePets[i].Type}" / >
-
-                  </svg>
-                </div>
-
-                <div class="card-body mt-0 pt-0">
-                  <!--<p class="card-text" >${hardCodePets[i].Bio}</p>-->
-                  
-                  <!--<p>Information about this animal</p>-->
-                  <div class="d-flex justify-content-between align-items-center">
-                    <strong class="text-body-primary">${hardCodePets[i].Name}</strong>
-                    <strong>${cardIcon}</strong>
+          let htmlSegment =
+            `<div class="col">
+              <a href="detailPage.html?id=${i}" style="text-decoration: none;">
+                <div class="card shadow border " /*style="background-color: ${cardColor};" style="background-color:#5c5b5b"*/>
+                  <div class=" m-4 mb-0">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                      <image class="rounded" width="100%" height="100%" href="${hardCodePets[i].Pic}" alt="${hardCodePets[i].Name} the ${hardCodePets[i].Type}" / >
+                    </svg>
                   </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                  <small class="text-muted">${hardCodePets[i].Type}</small>
-                  </div>
-                  <div class="d-flex justify-content-between align-items-center">
-                  <small class="text-muted">${hardCodePets[i].Age} years old</small>
-                  </div>
-                  
+                  <div class="card-body mt-0 pt-0">
+                    <!--<p class="card-text" >${hardCodePets[i].Bio}</p>-->
                     
-                    
-                  
+                    <!--<p>Information about this animal</p>-->
+                    <div class="d-flex justify-content-between align-items-center">
+                      <strong class="text-body-primary">${hardCodePets[i].Name}</strong>
+                      <strong>${cardIcon}</strong>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">${hardCodePets[i].Type}</small>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">${hardCodePets[i].Age} years old</small>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </a>
-          </div>`;
+              </a>
+            </div>`;
 
-        html += htmlSegment;
-
+          html += htmlSegment;
+        }
+        return html;
       }
-      displayHtml(html);
+      displayHtml(load());
 
     </script>
   </body>
