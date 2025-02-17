@@ -163,17 +163,17 @@
             <div class="modal-body">
               <!-- New Pet input -->
               <form id="myForm">
-                <input class="form-control" type="text" name="name" placeholder="Enter name" />
-                <input class="form-control" type="text" name="picture" placeholder="Enter Picture URL" />
-                <input class="form-control" type="text" name="breed" placeholder="Enter Breed" />
-                <input class="form-control" type="text" name="animal" placeholder="Enter type of animal" />
-                <input class="form-control" type="text" name="gender" placeholder="Enter the animal's sex" />
-                <input class="form-control" type="text" name="color" placeholder="Enter animal's color" />
-                <input class="form-control" type="text" name="fixed" placeholder="Answer Yes or No for Spayed/Neutered" />
-                <input class="form-control" type="text" name="age" placeholder="Enter age" />
-                <input class="form-control" type="text" name="microchip" placeholder="Enter microchip number" />
-                <input class="form-control" type="text" name="status" placeholder="Enter status" />
-                <input class="form-control" type="text" name="bio" placeholder="Enter bio" />
+                <input class="form-control m-1" type="text" name="name" placeholder="Enter name" />
+                <input class="form-control m-1" type="text" name="picture" placeholder="Enter Picture URL" />
+                <input class="form-control m-1" type="text" name="breed" placeholder="Enter Breed" />
+                <input class="form-control m-1" type="text" name="animal" placeholder="Enter type of animal" />
+                <input class="form-control m-1" type="text" name="gender" placeholder="Enter the animal's sex" />
+                <input class="form-control m-1" type="text" name="color" placeholder="Enter animal's color" />
+                <input class="form-control m-1" type="text" name="fixed" placeholder="Answer Yes or No for Spayed/Neutered" />
+                <input class="form-control m-1" type="text" name="age" placeholder="Enter age" />
+                <input class="form-control m-1" type="text" name="microchip" placeholder="Enter microchip number" />
+                <input class="form-control m-1" type="text" name="status" placeholder="Enter status" />
+                <input class="form-control m-1" type="text" name="bio" placeholder="Enter bio" />
               </form>
             </div>
             <div class="modal-footer">
@@ -270,11 +270,11 @@
 
           let cardColor;
 
-          if(pet.Sex == "Female"){
+          if(pet.Sex == "Female" || "female"){
             //cardColor = '#FDC5F5';
             cardIcon = `<i class="bi bi-gender-female h1"></i>`;
           }
-          else if(pet.Sex == "Male"){
+          else if(pet.Sex == "Male" || "male"){
             //cardColor = '#6EEDEB';
             cardIcon = `<i class="bi bi-gender-male h1"></i>`;
           } else {
