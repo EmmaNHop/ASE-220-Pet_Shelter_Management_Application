@@ -1,7 +1,37 @@
 
+function getAllJsonData(){
+    return json;
+}
+
+function getPetData(id){
+    return json[id];
+}
+
+function savePetData(newPet) {
+    console.log("Added " + newPet.Name + " to the json data");
+    json.push(newPet);
+    let objAdded = json[json.length - 1];
+    console.log(objAdded);
+}
+
+function removePetByID(id){
+    console.log("REMOVED");
+    delete json[id];
+    console.log(json[id]);
+}
+// For 
+function getLastJsonID(){
+    let lastElement = json.length - 1;
+    let id = lastElement.id;
+    return id;
+}
+
+function getArrLength(){
+    return json.length;
+}
+
 var json = 
  [
-
     {
         "Name": "Koda",
         "Pic": "assets/images/husky.png",
@@ -383,16 +413,3 @@ var json =
         "Bio": "Meet Sun, an outgoing and talkative Cockatiel who loves to whistle and sing! Sun was hand-raised and enjoys spending time with people. They love sitting on shoulders, mimicking sounds, and nibbling on millet treats. Sun is looking for a home where they will receive plenty of interaction and enrichment to keep their curious mind engaged."
     }
 ];
-
-function getAllJsonData(){
-    return json;
-}
-
-function getPetData(id){
-    return json[id];
-}
-
-function savePetData(newPet) {
-    json.push(newPet);
-    console.log("Added " + newPet.Name + " to the json data");
-}

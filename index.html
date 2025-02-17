@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="assets/js/color-modes.js"></script>
+  <head>
+    <script src="assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,16 +10,18 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title>Pet Shelter - Nate Brewer, Danny Poff, Emma Hopkins</title>
 
+    <!-- STYLE SHEET -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
+    <!-- Where the json data is and functions -->
+    <script id="json" src="/assets/js/pets.js"></script>
     
-        <!-- STYLE SHEET -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    
 
     <style>
       .bd-placeholder-img {
@@ -144,21 +147,22 @@
             <h1 class="fw-light">Pets</h1>
             <p class="lead text-body-secondary">Below are pets that are up for adoption, I think.</p>
           </div>
-            <div class="d-flex justify-content-end align-content-center">
-              <button type="button" id="create" data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary">Create</button>
-            </div>
+          <div class="d-flex justify-content-end align-content-center">
+            <button id="create" data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary">Create</button>
+          </div>
         </div>
       </section>
 
-      <!--create Modal-->
-      <div class="modal fade" id="createModal"  tabindex="-1" aria-labelledby="exampleModalLabel" >
+      <!--create New Pet Modal-->
+      <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-        <div class="modal-content">
+          <div class="modal-content">
             <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Pet Information</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Pet Information</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+              <!-- New Pet input -->
               <form id="myForm">
                 <input class="form-control" type="text" name="name" placeholder="Enter name" />
                 <input class="form-control" type="text" name="picture" placeholder="Enter Picture URL" />
@@ -174,16 +178,17 @@
               </form>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <!--save info into pets.js, will have to add id and data ourselves. Status may need to be broken up somehow-->
-            <button id="btn-task-save" type="button" class="btn btn-primary">Submit</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <!--save info into pets.js, will have to add id and data ourselves. Status may need to be broken up somehow-->
+              <button id="btn-task-save" type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
             </div>
+          </div>
         </div>
-        </div>
-    </div>
+      </div>
+      
 
     <!--display Modal-->
-    <div class="modal fade" id="displayModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="displayModal" tabindex="-1" aria-labelledby="displayModalLabel" aria-hidden="true">
       <div class="modal-dialog">
       <div class="modal-content">
           <div class="modal-header">
@@ -194,18 +199,16 @@
             <p id="petColor">color: </p>
             <p id="breed">Breed: </p>
             <p id="sex">Sex: </p>
-
             <p id="bio">Bio: </p>
-            
             <a id="petPage" href="">View page</a>
           </div>
           <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button id="btn-delete" type="button" class="btn btn-danger"data-bs-dismiss="modal">Delete</button>
+          <button id="btn-delete" type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
           </div>
+        </div>
       </div>
-      </div>
-  </div>
+    </div>
 
 
       <div class="album py-5 bg-body-tertiary">
@@ -238,28 +241,101 @@
         
     </footer>
     
-    <!--changed the SHA because it was causing an error. If this change causes no other problems, remove this comment-->
-    <script src="/assets/js/bootstrap.bundle.min.js" integrity="sha384-HZYy7/e2t5ulY6HtYcKY7AWRuIBuyk3YMY+jfKGECq5pbYjpOnD+SSNz14RIH6F7" crossorigin="anonymous"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Where the json data is and functions -->
-    <script src="./assets/js/pets.js"></script>
     <script>
-  
+
+      // Writes the HTML to the body of of the page from the JSON array
+      function displayHtml(html){
+        document.querySelector('#petThumbnail').innerHTML = html;
+      }
+
+
+      function load() {
+        let html ='';
+
+        for(let i = loaded; i < loaded+9; i++) {
+          //stops programm from reading too far and causing errors before printing.
+          //Also hides button
+          if(i >= getArrLength()) {
+            document.querySelector('#loadMore').style.display = "none";
+            break;
+          }
+
+          let pet = getPetData(i);
+
+          let cardColor;
+
+          if(pet.Sex == "Female"){
+            //cardColor = '#FDC5F5';
+            cardIcon = `<i class="bi bi-gender-female h1"></i>`;
+          }
+          else if(pet.Sex == "Male"){
+            //cardColor = '#6EEDEB';
+            cardIcon = `<i class="bi bi-gender-male h1"></i>`;
+          } else {
+            //cardColor = '#ADADAD';
+            cardIcon = `<i class="bi bi-question-circle h1"></i>`; 
+          }
+          //id="${id}"
+
+          let htmlSegment =
+            `<div id="${i}"class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever="${i}">
+              <div class="card shadow border">
+                <div class=" m-4 mb-0">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <image class="rounded" width="100%" height="100%" href="${pet.Pic}" alt="${pet.Name} the ${pet.Type}" / >
+                  </svg>
+                </div>
+                <div class="card-body mt-0 pt-0">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <strong class="text-body-primary">${pet.Name}</strong>
+                    <strong>${cardIcon}</strong>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">${pet.Type}</small>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">${pet.Age} years old</small>
+                  </div>
+                </div>
+              </div>
+           </div>`;
+
+          html += htmlSegment;
+        }
+        return html;
+      }
+
+
       var loaded = 0;
-      var hardCodePets = getAllJsonData();
-      var allPets = hardCodePets.length;
 
       //display pet info to displayModal
       document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget
-        var pet = button.getAttribute('data-bs-whatever')
+        var button = event.relatedTarget;
+        var petID = button.getAttribute('data-bs-whatever');
 
-        document.querySelector('#petName').innerText = hardCodePets[pet].Name;
-        document.querySelector('#petColor').innerText = 'Color: ' + hardCodePets[pet].Color;
-        document.querySelector('#breed').innerText = 'Breed: ' + hardCodePets[pet].Breed;
-        document.querySelector('#sex').innerText = 'Sex: ' + hardCodePets[pet].Sex;
-        document.querySelector('#bio').innerText = 'Bio: ' + hardCodePets[pet].Bio;
-        document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + pet + '">View page</a>';
+        var pet = getPetData(petID);
+
+        document.querySelector('#petName').innerText = pet.Name;
+        document.querySelector('#petColor').innerText = pet.Color;
+        document.querySelector('#breed').innerText = pet.Breed;
+        document.querySelector('#sex').innerText = pet.Sex;
+        document.querySelector('#bio').innerText = pet.Bio;
+        document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + petID + '">View page</a>';
+
+        // Delete button
+
+        document.querySelector("#btn-delete").addEventListener('click', function(){
+
+          // Removes the children
+          document.getElementById(petID).innerHTML = '';
+          // Removes the parent
+          document.getElementById(petID).remove();
+
+          // Removes the pet from the JSON Array
+          removePetByID(pet);
+        })
 
       });
 
@@ -269,72 +345,9 @@
         document.querySelector('#petThumbnail').innerHTML += load();
       });
 
-      function displayHtml(html){
-        document.querySelector('#petThumbnail').innerHTML = html;
-      }
-
-      function load() {
-        let html ='';
-
-        for(let i = loaded; i < loaded+9; i++) {
-          //stops programm from reading too far and causing errors before printing.
-          //Also hides button
-          if(i >= allPets) {
-            document.querySelector('#loadMore').style.display = "none";
-            break;
-          }
-
-          let cardColor;
-
-          if(hardCodePets[i].Sex == "Female"){
-            //cardColor = '#FDC5F5';
-            cardIcon = `<i class="bi bi-gender-female h1"></i>`;
-          }
-          else if(hardCodePets[i].Sex == "Male"){
-            //cardColor = '#6EEDEB';
-            cardIcon = `<i class="bi bi-gender-male h1"></i>`;
-          } else {
-            //cardColor = '#ADADAD';
-            cardIcon = `<i class="bi bi-question-circle h1"></i>`; 
-          }
-
-          let htmlSegment =
-            `<div class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever=${i}>
-              <!--<a href="detailPage.html?id=${i}" style="text-decoration: none;">-->
-                <div class="card shadow border " /*style="background-color: ${cardColor};" style="background-color:#5c5b5b"*/>
-                  <div class=" m-4 mb-0">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                      <image class="rounded" width="100%" height="100%" href="${hardCodePets[i].Pic}" alt="${hardCodePets[i].Name} the ${hardCodePets[i].Type}" / >
-                    </svg>
-                  </div>
-                  <div class="card-body mt-0 pt-0">
-                    <!--<p class="card-text" >${hardCodePets[i].Bio}</p>-->
-                    
-                    <!--<p>Information about this animal</p>-->
-                    <div class="d-flex justify-content-between align-items-center">
-                      <strong class="text-body-primary">${hardCodePets[i].Name}</strong>
-                      <strong>${cardIcon}</strong>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">${hardCodePets[i].Type}</small>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">${hardCodePets[i].Age} years old</small>
-                    </div>
-                  </div>
-                </div>
-              <!--</a>-->
-            </div>`;
-
-          html += htmlSegment;
-        }
-        return html;
-      }
       displayHtml(load());
 
-    </script>
-    <script>
-    //code to read form content and send it to the json file  
+      // Code to read form content and send it to the json file  
 
       const form = document.getElementById('myForm');
 
@@ -364,9 +377,15 @@
           "Color": inputColor,
           "SpayedNeutered": inputFixed,
           "Age": inputAge,
-          "ID": 12345,
+          "ID": toString(parseInt(getLastJsonID())+1),
           "Microchip Number": inputMicrochip,
           "DatePosted": "date",
+          "status": [
+              "Health checked", 
+              "Vaccinations up to date", 
+              "Regularly dewormed",
+              "Microchiped"
+          ],
           "Status": inputStatus,
           "Bio": inputBio
         };
@@ -381,4 +400,3 @@
     </script>
   </body>
 </html>
-+
