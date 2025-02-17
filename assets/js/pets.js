@@ -31,7 +31,8 @@ function removeFromJson(index){
     
     let array = jsonToObj();
 
-    delete array[index];
+    //delete array[index];
+    array.splice(index, 1);
     arrToJsonFile(array);
 
 }
