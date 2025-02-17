@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
-  <head><script src="assets/js/color-modes.js"></script>
+  <head>
+    <script src="assets/js/color-modes.js"></script>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,15 +10,18 @@
     <meta name="generator" content="Hugo 0.122.0">
     <title>Pet Shelter - Nate Brewer, Danny Poff, Emma Hopkins</title>
 
+    <!-- STYLE SHEET -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
-
-        <!-- STYLE SHEET -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Where the json data is and functions -->
+    <script id="json" src="/assets/js/pets.js"></script>
+    
+    
 
     <style>
       .bd-placeholder-img {
@@ -99,10 +103,10 @@
     </style>
 
   </head>
-  <body>
+  <body data-bs-theme="dark">
 
         <!-- Nav Bar -->
-    <header data-bs-theme="dark">
+    <header>
       <div class="collapse text-bg-dark" id="navbarHeader">
         <div class="container">
           <div class="row">
@@ -121,7 +125,7 @@
           </div>
         </div>
       </div>
-      <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="navbar shadow">
         <div class="container">
           <a href="#" class="navbar-brand d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
@@ -143,8 +147,70 @@
             <h1 class="fw-light">Pets</h1>
             <p class="lead text-body-secondary">Below are pets that are up for adoption, I think.</p>
           </div>
+          <div class="d-flex justify-content-end align-content-center">
+            <button id="create" data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary">Create</button>
+          </div>
         </div>
       </section>
+
+      <!--create New Pet Modal-->
+      <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Pet Information</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- New Pet input -->
+              <form id="myForm">
+                <input class="form-control" type="text" name="name" placeholder="Enter name" />
+                <input class="form-control" type="text" name="picture" placeholder="Enter Picture URL" />
+                <input class="form-control" type="text" name="breed" placeholder="Enter Breed" />
+                <input class="form-control" type="text" name="animal" placeholder="Enter type of animal" />
+                <input class="form-control" type="text" name="gender" placeholder="Enter the animal's sex" />
+                <input class="form-control" type="text" name="color" placeholder="Enter animal's color" />
+                <input class="form-control" type="text" name="fixed" placeholder="Answer Yes or No for Spayed/Neutered" />
+                <input class="form-control" type="text" name="age" placeholder="Enter age" />
+                <input class="form-control" type="text" name="microchip" placeholder="Enter microchip number" />
+                <input class="form-control" type="text" name="status" placeholder="Enter status" />
+                <input class="form-control" type="text" name="bio" placeholder="Enter bio" />
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <!--save info into pets.js, will have to add id and data ourselves. Status may need to be broken up somehow-->
+              <button id="btn-task-save" type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    <!--display Modal-->
+    <div class="modal fade" id="displayModal" tabindex="-1" aria-labelledby="displayModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h1 class="modal-title fs-5" id="petName"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="petColor">color: </p>
+            <p id="breed">Breed: </p>
+            <p id="sex">Sex: </p>
+            <p id="bio">Bio: </p>
+            <a id="petPage" href="">View page</a>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="btn-delete" type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
 
@@ -153,77 +219,184 @@
           </div>
 
         </div>
+          <br />
+          <div class="d-flex justify-content-center align-content-center">
+            <button type="button" id="loadMore" class="btn btn-secondary">Load more</button>
+          </div>
       </div>
     </main>
 
     <footer class="py-5 bg-dark text-white">
-      <div class="container">
-        <p class="float-end mb-1">
-          <a href="#">Back to top</a>
-        </p>
-        <p class="mb-1">By Danny Poff, Nate Brewer, and Emma Hopkins</p></div>
+      <div class="d-flex justify-content-center container">
+        
+        
+        <div class="text-center">
+          <p class="mb-0">© 2021 Pet Shelter ™</p>
+          <div class="mb-1">Danny Poff • Nate Brewer • Emma Hopkins</div>
+          <div class="mb-1">
+            <a href="#">Back to top</a>
+          </div>
+        </div>
+      </div>
+        
     </footer>
+    
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
 
-    <script src="/assets/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
-    <!-- Where the json data is and functions -->
-    <script src="./assets/js/pets.js"></script>
     <script>
-  
 
+      // Writes the HTML to the body of of the page from the JSON array
       function displayHtml(html){
         document.querySelector('#petThumbnail').innerHTML = html;
       }
 
-      var hardCodePets = getAllJsonData();
 
+      function load() {
+        let html ='';
 
-      let html ='';
+        for(let i = loaded; i < loaded+9; i++) {
+          //stops programm from reading too far and causing errors before printing.
+          //Also hides button
+          if(i >= getArrLength()) {
+            document.querySelector('#loadMore').style.display = "none";
+            break;
+          }
 
-      for(let i = 0; i < 6; i++) {
+          let pet = getPetData(i);
 
-        let cardColor;
+          let cardColor;
 
-        
-        if(hardCodePets[i].Sex == "Female"){
-          cardColor = '#FDC5F5';
-        }
-        else if(hardCodePets[i].Sex == "Male"){
-          cardColor = '#6EEDEB';
-        } else {
-          cardColor = '#ADADAD';
-        }
+          if(pet.Sex == "Female"){
+            //cardColor = '#FDC5F5';
+            cardIcon = `<i class="bi bi-gender-female h1"></i>`;
+          }
+          else if(pet.Sex == "Male"){
+            //cardColor = '#6EEDEB';
+            cardIcon = `<i class="bi bi-gender-male h1"></i>`;
+          } else {
+            //cardColor = '#ADADAD';
+            cardIcon = `<i class="bi bi-question-circle h1"></i>`; 
+          }
+          //id="${id}"
 
-        let htmlSegment =
-          `<div class="col">
-            <a href="detailPage.html?id=${i}" style="text-decoration: none;">
-              <div class="card shadow-sm" style="background-color: ${cardColor};">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                  <image width="100%" height="100%" href="${hardCodePets[i].Pic}" alt="${hardCodePets[i].Name} the ${hardCodePets[i].Type}" />
-                  
-                </svg>
-
-                <div class="card-body">
-                  <p class="card-text" >${hardCodePets[i].Bio}</p>
-                  <br/>
-                  <p>Information about this animal</p>
+          let htmlSegment =
+            `<div id="${i}"class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever="${i}">
+              <div class="card shadow border">
+                <div class=" m-4 mb-0">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <image class="rounded" width="100%" height="100%" href="${pet.Pic}" alt="${pet.Name} the ${pet.Type}" / >
+                  </svg>
+                </div>
+                <div class="card-body mt-0 pt-0">
                   <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-dark">${hardCodePets[i].Name}</button>
-                      <button type="button" class="btn btn-sm btn-outline-dark">${hardCodePets[i].Type}</button>
-                    </div>
-                    <small class="text-muted">${hardCodePets[i].Age} years old</small>
+                    <strong class="text-body-primary">${pet.Name}</strong>
+                    <strong>${cardIcon}</strong>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">${pet.Type}</small>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">${pet.Age} years old</small>
                   </div>
                 </div>
               </div>
-            </a>
-          </div>`;
+           </div>`;
 
-        html += htmlSegment;
-
+          html += htmlSegment;
+        }
+        return html;
       }
-      displayHtml(html);
 
+
+      var loaded = 0;
+
+      //display pet info to displayModal
+      document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var petID = button.getAttribute('data-bs-whatever');
+
+        var pet = getPetData(petID);
+
+        document.querySelector('#petName').innerText = pet.Name;
+        document.querySelector('#petColor').innerText = pet.Color;
+        document.querySelector('#breed').innerText = pet.Breed;
+        document.querySelector('#sex').innerText = pet.Sex;
+        document.querySelector('#bio').innerText = pet.Bio;
+        document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + petID + '">View page</a>';
+
+        // Delete button
+
+        document.querySelector("#btn-delete").addEventListener('click', function(){
+
+          // Removes the children
+          document.getElementById(petID).innerHTML = '';
+          // Removes the parent
+          document.getElementById(petID).remove();
+
+          // Removes the pet from the JSON Array
+          removePetByID(pet);
+        })
+
+      });
+
+      //loads more content
+      document.querySelector('#loadMore').addEventListener('click', function() {
+        loaded +=9;
+        document.querySelector('#petThumbnail').innerHTML += load();
+      });
+
+      displayHtml(load());
+
+      // Code to read form content and send it to the json file  
+
+      const form = document.getElementById('myForm');
+
+      document.getElementById('btn-task-save').addEventListener('click', function () {
+        
+        console.log('Form submitted!');
+
+        const inputName = form.elements.name.value;
+        const inputPic = form.elements.picture.value;
+        const inputBreed = form.elements.breed.value;
+        const inputAnimal = form.elements.animal.value;
+        const inputGender = form.elements.gender.value;
+        const inputColor = form.elements.color.value;
+        const inputFixed = form.elements.fixed.value;
+        const inputAge = form.elements.age.value;
+        const inputMicrochip = form.elements.microchip.value;
+        const inputStatus = form.elements.status.value;
+        const inputBio = form.elements.bio.value;
+
+
+        const newPet = {
+          "Name": inputName,
+          "Pic": inputPic,
+          "Breed": inputBreed,
+          "Type": inputAnimal,
+          "Sex": inputGender,
+          "Color": inputColor,
+          "SpayedNeutered": inputFixed,
+          "Age": inputAge,
+          "ID": toString(parseInt(getLastJsonID())+1),
+          "Microchip Number": inputMicrochip,
+          "DatePosted": "date",
+          "status": [
+              "Health checked", 
+              "Vaccinations up to date", 
+              "Regularly dewormed",
+              "Microchiped"
+          ],
+          "Status": inputStatus,
+          "Bio": inputBio
+        };
+        console.log('Name:', inputName);
+
+        // Assuming you have a function to save the pet data in pets.js
+        savePetData(newPet);
+
+        // Reset the form after submission
+        form.reset();
+      });
     </script>
   </body>
 </html>
