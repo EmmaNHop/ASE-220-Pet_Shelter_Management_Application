@@ -16,7 +16,7 @@
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
-
+    
         <!-- STYLE SHEET -->
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
@@ -151,7 +151,7 @@
       </section>
 
       <!--create Modal-->
-      <div class="modal fade" id="createModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="createModal"  tabindex="-1" aria-labelledby="exampleModalLabel" >
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -159,22 +159,24 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input class="form-control" type="text" name="task" placeholder="Enter name" />
-                <input class="form-control" type="text" name="task" placeholder="Enter Picture URL" />
-                <input class="form-control" type="text" name="task" placeholder="Enter Breed" />
-                <input class="form-control" type="text" name="task" placeholder="Enter type of animal" />
-                <input class="form-control" type="text" name="task" placeholder="Enter the animal's sex" />
-                <input class="form-control" type="text" name="task" placeholder="Enter animal's color" />
-                <input class="form-control" type="text" name="task" placeholder="Answer Yes or No for Spayed/Neutered" />
-                <input class="form-control" type="text" name="task" placeholder="Enter age" />
-                <input class="form-control" type="text" name="task" placeholder="Enter microchip number" />
-                <input class="form-control" type="text" name="task" placeholder="Enter status" />
-                <input class="form-control" type="text" name="task" placeholder="Enter bio" />
+              <form id="myForm">
+                <input class="form-control" type="text" name="name" placeholder="Enter name" />
+                <input class="form-control" type="text" name="picture" placeholder="Enter Picture URL" />
+                <input class="form-control" type="text" name="breed" placeholder="Enter Breed" />
+                <input class="form-control" type="text" name="animal" placeholder="Enter type of animal" />
+                <input class="form-control" type="text" name="gender" placeholder="Enter the animal's sex" />
+                <input class="form-control" type="text" name="color" placeholder="Enter animal's color" />
+                <input class="form-control" type="text" name="fixed" placeholder="Answer Yes or No for Spayed/Neutered" />
+                <input class="form-control" type="text" name="age" placeholder="Enter age" />
+                <input class="form-control" type="text" name="microchip" placeholder="Enter microchip number" />
+                <input class="form-control" type="text" name="status" placeholder="Enter status" />
+                <input class="form-control" type="text" name="bio" placeholder="Enter bio" />
+              </form>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <!--save info into pets.js, will have to add id and data ourselves. Status may need to be broken up somehow-->
-            <button id="btn-task-save" type="button" class="btn btn-primary"data-bs-dismiss="modal">Save changes</button>
+            <button id="btn-task-save" type="button" class="btn btn-primary">Submit</button>
             </div>
         </div>
         </div>
@@ -235,7 +237,7 @@
       </div>
         
     </footer>
-
+    
     <!--changed the SHA because it was causing an error. If this change causes no other problems, remove this comment-->
     <script src="/assets/js/bootstrap.bundle.min.js" integrity="sha384-HZYy7/e2t5ulY6HtYcKY7AWRuIBuyk3YMY+jfKGECq5pbYjpOnD+SSNz14RIH6F7" crossorigin="anonymous"></script>
 
@@ -331,5 +333,52 @@
       displayHtml(load());
 
     </script>
+    <script>
+    //code to read form content and send it to the json file  
+
+      const form = document.getElementById('myForm');
+
+      document.getElementById('btn-task-save').addEventListener('click', function () {
+        
+        console.log('Form submitted!');
+
+        const inputName = form.elements.name.value;
+        const inputPic = form.elements.picture.value;
+        const inputBreed = form.elements.breed.value;
+        const inputAnimal = form.elements.animal.value;
+        const inputGender = form.elements.gender.value;
+        const inputColor = form.elements.color.value;
+        const inputFixed = form.elements.fixed.value;
+        const inputAge = form.elements.age.value;
+        const inputMicrochip = form.elements.microchip.value;
+        const inputStatus = form.elements.status.value;
+        const inputBio = form.elements.bio.value;
+
+
+        const newPet = {
+          "Name": inputName,
+          "Pic": inputPic,
+          "Breed": inputBreed,
+          "Type": inputAnimal,
+          "Sex": inputGender,
+          "Color": inputColor,
+          "SpayedNeutered": inputFixed,
+          "Age": inputAge,
+          "ID": 12345,
+          "Microchip Number": inputMicrochip,
+          "DatePosted": "date",
+          "Status": inputStatus,
+          "Bio": inputBio
+        };
+        console.log('Name:', inputName);
+
+        // Assuming you have a function to save the pet data in pets.js
+        savePetData(newPet);
+
+        // Reset the form after submission
+        form.reset();
+      });
+    </script>
   </body>
 </html>
++

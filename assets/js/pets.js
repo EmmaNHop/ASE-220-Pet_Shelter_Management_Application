@@ -1,10 +1,3 @@
-function getAllJsonData(){
-    return json;
-}
-
-function getPetData(id){
-    return json[id];
-}
 
 var json = 
  [
@@ -16,7 +9,7 @@ var json =
         "Type": "Dog",
         "Sex": "Female",
         "Color": "Black and White",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "3",
         "ID": "76238",
         "Microchip Number": "982000364789931",
@@ -36,7 +29,7 @@ var json =
         "Type": "Cat",
         "Sex": "Male",
         "Color": "Seal Point",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "2",
         "ID": "59821",
         "Microchip Number": "982000364789642",
@@ -56,7 +49,7 @@ var json =
         "Type": "Guinea Pig",
         "Sex": "Female",
         "Color": "White and Brown",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "1",
         "ID": "84532",
         "Microchip Number": "982000364789765",
@@ -76,7 +69,7 @@ var json =
         "Type": "Ferret",
         "Sex": "Male",
         "Color": "Sable",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "2",
         "ID": "72365",
         "Microchip Number": "982000364789384",
@@ -96,7 +89,7 @@ var json =
         "Type": "Tortoise",
         "Sex": "Female",
         "Color": "Brown and Yellow Shell",
-        "SpayedNeutured": "N/A",
+        "SpayedNeutered": "N/A",
         "Age": "10",
         "ID": "90241",
         "Microchip Number": "982000364789987",
@@ -116,7 +109,7 @@ var json =
         "Type": "Cat",
         "Sex": "Female",
         "Color": "Brown Tabby",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "3",
         "ID": "45892",
         "Microchip Number": "982000364789315",
@@ -136,7 +129,7 @@ var json =
         "Type": "Dog",
         "Sex": "Male",
         "Color": "Golden",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "4",
         "ID": "57320",
         "Microchip Number": "982000364789612",
@@ -156,7 +149,7 @@ var json =
         "Type": "Rabbit",
         "Sex": "Female",
         "Color": "White with Grey Spots",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "2",
         "ID": "69241",
         "Microchip Number": "982000364789827",
@@ -176,7 +169,7 @@ var json =
         "Type": "Bird",
         "Sex": "Male",
         "Color": "Gray with Yellow Face",
-        "SpayedNeutured": "N/A",
+        "SpayedNeutered": "N/A",
         "Age": "1",
         "ID": "32187",
         "Microchip Number": "982000364789529",
@@ -196,7 +189,7 @@ var json =
         "Type": "Dog",
         "Sex": "Male",
         "Color": "Black and White",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "3",
         "ID": "76239",
         "Microchip Number": "982000364789932",
@@ -216,7 +209,7 @@ var json =
         "Type": "Cat",
         "Sex": "Female",
         "Color": "Seal Point",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "2",
         "ID": "59822",
         "Microchip Number": "982000364789643",
@@ -236,7 +229,7 @@ var json =
         "Type": "Guinea Pig",
         "Sex": "Male",
         "Color": "White and Brown",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "1",
         "ID": "84533",
         "Microchip Number": "982000364789766",
@@ -256,7 +249,7 @@ var json =
         "Type": "Ferret",
         "Sex": "Female",
         "Color": "Sable",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "2",
         "ID": "72366",
         "Microchip Number": "982000364789385",
@@ -276,7 +269,7 @@ var json =
         "Type": "Tortoise",
         "Sex": "Male",
         "Color": "Brown and Yellow Shell",
-        "SpayedNeutured": "N/A",
+        "SpayedNeutered": "N/A",
         "Age": "10",
         "ID": "90242",
         "Microchip Number": "982000364789988",
@@ -296,7 +289,7 @@ var json =
         "Type": "Cat",
         "Sex": "Male",
         "Color": "Brown Tabby",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "3",
         "ID": "45893",
         "Microchip Number": "982000364789316",
@@ -316,7 +309,7 @@ var json =
         "Type": "Dog",
         "Sex": "Female",
         "Color": "Golden",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "4",
         "ID": "57321",
         "Microchip Number": "982000364789613",
@@ -336,7 +329,7 @@ var json =
         "Type": "Rabbit",
         "Sex": "Male",
         "Color": "White with Grey Spots",
-        "SpayedNeutured": "Yes",
+        "SpayedNeutered": "Yes",
         "Age": "2",
         "ID": "69242",
         "Microchip Number": "982000364789828",
@@ -356,7 +349,7 @@ var json =
         "Type": "Bird",
         "Sex": "Female",
         "Color": "Gray with Yellow Face",
-        "SpayedNeutured": "N/A",
+        "SpayedNeutered": "N/A",
         "Age": "1",
         "ID": "32188",
         "Microchip Number": "982000364789530",
@@ -376,7 +369,7 @@ var json =
         "Type": "Bird",
         "Sex": "?",
         "Color": "Gray with Yellow Face",
-        "SpayedNeutured": "N/A",
+        "SpayedNeutered": "N/A",
         "Age": "1",
         "ID": "32189",
         "Microchip Number": "982000364789531",
@@ -391,4 +384,15 @@ var json =
     }
 ];
 
-    
+function getAllJsonData(){
+    return json;
+}
+
+function getPetData(id){
+    return json[id];
+}
+
+function savePetData(newPet) {
+    json.push(newPet);
+    console.log("Added " + newPet.Name + " to the json data");
+}
