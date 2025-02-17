@@ -1,36 +1,59 @@
-
-function getAllJsonData(){
-    return json;
+function getAllarrData(){
+    return arr;
 }
 
-function getPetData(id){
-    return json[id];
-}
+function getLastArrID(){
+    let array = jsonToObj();
 
-function savePetData(newPet) {
-    console.log("Added " + newPet.Name + " to the json data");
-    json.push(newPet);
-    let objAdded = json[json.length - 1];
-    console.log(objAdded);
-}
-
-function removePetByID(id){
-    console.log("REMOVED");
-    delete json[id];
-    console.log(json[id]);
-}
-// For 
-function getLastJsonID(){
-    let lastElement = json.length - 1;
-    let id = lastElement.id;
-    return id;
+    return array[array.length - 1].ID;
 }
 
 function getArrLength(){
-    return json.length;
+    let array = jsonToObj();
+
+    return array.length;
 }
 
-var json = 
+function arrToJsonFile(array = arr){
+
+    localStorage.setItem('fullArray', JSON.stringify(array));
+}
+
+function removeFromJson(index){
+    
+    let array = jsonToObj();
+
+    delete array[index];
+    arrToJsonFile(array);
+
+}
+
+function addToJson(pet){
+    
+    let array = jsonToObj();
+    console.log(pet);
+    array.push(pet); 
+    arrToJsonFile(array);
+    
+}
+
+function jsonToObj(){
+
+    let array = localStorage.getItem('fullArray');
+
+    return JSON.parse(array);
+}
+
+function getPetFromJson(index){
+
+    let obj = jsonToObj();
+
+    return obj[index];
+
+}
+
+
+var arr = 
  [
     {
         "Name": "Koda",

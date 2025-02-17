@@ -19,8 +19,7 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
     <!-- Where the json data is and functions -->
-    <script id="json" src="/assets/js/pets.js"></script>
-    
+    <script src="/assets/js/pets.js"></script>
     
 
     <style>
@@ -245,6 +244,11 @@
 
     <script>
 
+      // In pets.js - moves the array to a JSON file
+      if(getArrLength() == 0){
+        arrToJsonFile();
+      }
+
       // Writes the HTML to the body of of the page from the JSON array
       function displayHtml(html){
         document.querySelector('#petThumbnail').innerHTML = html;
@@ -262,7 +266,7 @@
             break;
           }
 
-          let pet = getPetData(i);
+          let pet = getPetFromJson(i);
 
           let cardColor;
 
@@ -310,12 +314,12 @@
 
       var loaded = 0;
 
-      //display pet info to displayModal
+      // Display pet info to displayModal
       document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var petID = button.getAttribute('data-bs-whatever');
 
-        var pet = getPetData(petID);
+        var pet = getPetFromJson(petID);
 
         document.querySelector('#petName').innerText = pet.Name;
         document.querySelector('#petColor').innerText = pet.Color;
@@ -334,7 +338,7 @@
           document.getElementById(petID).remove();
 
           // Removes the pet from the JSON Array
-          removePetByID(pet);
+          removeFromJson(petID);
         })
 
       });
@@ -377,7 +381,7 @@
           "Color": inputColor,
           "SpayedNeutered": inputFixed,
           "Age": inputAge,
-          "ID": toString(parseInt(getLastJsonID())+1),
+          "ID": toString(parseInt(getLastArrID())+1),
           "Microchip Number": inputMicrochip,
           "DatePosted": "date",
           "status": [
@@ -392,7 +396,8 @@
         console.log('Name:', inputName);
 
         // Assuming you have a function to save the pet data in pets.js
-        savePetData(newPet);
+        //savePetData(newPet);
+        addToJson(newPet);
 
         // Reset the form after submission
         form.reset();
