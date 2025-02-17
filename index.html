@@ -261,7 +261,6 @@
         for(let i = 0; i < 9; i++) {
           //stops programm from reading too far and causing errors before printing.
           //Also hides button
-          console.log('loaded >= getArrLength() | ' + loaded + ' >= ' + getArrLength());
           if(loaded >= getArrLength()) {
             document.querySelector('#loadMore').style.display = "none";
             break;
@@ -309,6 +308,7 @@
 
           html += htmlSegment;
           
+          //helps load more dynamically
           loaded++;
         }
         return html;
