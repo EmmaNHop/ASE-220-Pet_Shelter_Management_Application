@@ -258,15 +258,16 @@
       function load() {
         let html ='';
 
-        for(let i = loaded; i < loaded+9; i++) {
+        for(let i = 0; i < 9; i++) {
           //stops programm from reading too far and causing errors before printing.
           //Also hides button
-          if(i >= getArrLength()) {
+          console.log('loaded >= getArrLength() | ' + loaded + ' >= ' + getArrLength());
+          if(loaded >= getArrLength()) {
             document.querySelector('#loadMore').style.display = "none";
             break;
           }
 
-          let pet = getPetFromJson(i);
+          let pet = getPetFromJson(loaded);
 
           let cardColor;
 
@@ -284,7 +285,7 @@
           //id="${id}"
 
           let htmlSegment =
-            `<div id="${i}"class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever="${i}">
+            `<div id="${loaded}"class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever="${loaded}">
               <div class="card shadow border">
                 <div class=" m-4 mb-0">
                   <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -307,6 +308,8 @@
            </div>`;
 
           html += htmlSegment;
+          
+          loaded++;
         }
         return html;
       }
@@ -345,7 +348,6 @@
 
       //loads more content
       document.querySelector('#loadMore').addEventListener('click', function() {
-        loaded +=9;
         document.querySelector('#petThumbnail').innerHTML += load();
       });
 
@@ -402,12 +404,11 @@
         // Reset the form after submission
         form.reset();
 
-        /*
+        //loads the created item if everything was alredy loaded
         if(loaded>=getArrLength()-2) {
-          loaded +=1;
+          console.log('LOAD');
           document.querySelector('#petThumbnail').innerHTML += load();
         }
-        */
       });
     </script>
   </body>
