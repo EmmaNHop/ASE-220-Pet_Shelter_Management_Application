@@ -122,7 +122,9 @@
             const myParam = urlParams.get('id');
 
             // From pets.js
-            var petData = getPetData(myParam);            
+            var petData = getPetFromJson(myParam);     
+
+            console.log(getPetFromJson(getArrLength()-1));       
             
             // Just to help expedite the process for ya
             let petName = petData.Name;
