@@ -10,8 +10,16 @@ function getLastArrID(){
 
 function getArrLength(){
     let array = jsonToObj();
-
-    return array.length;
+    
+    try{
+        return array.length;
+    }
+    catch(error){
+        console.log(error);
+        return 0;
+    }
+    
+    
 }
 
 function arrToJsonFile(array = arr){
