@@ -15,7 +15,7 @@ const petHandler = require('../handlers/pet_handler');
 // Get all pets (Keep in mind this is still using the path /api/pets, however it is sent as a route to app.js)
 router.get('/', async (req, res) => {
 
-    // Takes the query param for the type
+    // Takes the query param for the type if you want to filter by type
     const { type } = req.query;
 
     var content = [];
@@ -38,7 +38,7 @@ router.get('/', async (req, res) => {
         } 
     }catch(error){
             console.error(error);
-            return res.status(404).json(error `Pets not found`);
+            return res.status(404).json({error: 'Pets not found'});
     }
     
 });
@@ -48,43 +48,87 @@ router.post('/', async (req, res) => {
     
     const pet = req.body;
 
-    try {
-       
-        await petHandler.createPet(pet);
+    //console.log(pet);
 
+    try {
+        await petHandler.createPet(pet);
+        res.status(201).json(pet);
     } catch(error){
         console.log(error);
         res.status(500).json({ error : 'Error creating pet'});
     }
-
-    //console.log(pet);
-
-    res.send(pet);
 });
 
 // Updates a current pet
-router.put('/', async (req, res) => {
+router.put('/:id', async (req, res) => {
 
-    // TODO: get user updates and add to pets 
-    res.send("Put a new thing in here");
+    // Sends the updated pet 
+    const pet = req.body;
+
+    console.log(pet);
+
+    const { id } = req.params.id;
+
+    console.log(req.params.id);
+
+    // just validating the id, might be redundant
+    if(pet.id !== req.params.id){
+        console.log("id's do not match");
+        res.status(400).json({error: "ID in url and from request body do not match"});
+        return;
+    }
+
+    try{
+        await petHandler.editPet(pet);
+
+        res.json(pet);
+
+    }catch(error){
+        console.error(`Error editing pet with id: ${pet.id}` + error);
+        res.status(500).json({ error: "Error editing pet"});
+    }
 
 });
 
 // Deletes a pet
-router.delete('/', async (req, res) =>{
+router.delete('/:id', async (req, res) =>{
 
-    // TODO: get pet user wants to delete and update pets.json
-    res.send("Delete Pet")
+    // Sends the updated pet 
+    const pet = req.body;
+
+    console.log(pet);
+
+    const { id } = req.params.id;
+
+    // just validating the id, might be redundant
+    if(pet.id !== id){
+        console.log("Error: id's do not match");
+        res.status(400).json({error: "ID in url and from request body do not match"});
+        return;
+    }
+
+    try{
+        await petHandler.deletePet(pet);
+
+        res.json(pet);
+
+    }catch(error){
+        console.error(`Error editing pet with id: ${pet.id}\n` + error);
+        res.status(500).json({ error: "Error deleting pet"});
+    }
+
 })
 
 // Gets the pet by id, since ids are unique
 router.get('/:id', async (req, res) => {
 
     console.log(req.params.id);
-
-    let pet = await petHandler.getPetById(req.params.id);
-
-    res.send(pet);
+    try{
+        let pet = await petHandler.getPetById(req.params.id);
+        res.status.json(pet);
+    } catch (error){
+        res.status(500).json({error : 'Failed to get pet'});
+    }
 })
 
 // Sends router to '../app.js'
