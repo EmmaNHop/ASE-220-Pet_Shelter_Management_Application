@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <script src="assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="A Pet Shelter page to adopt cute pets!">
+    <meta name="author" content="Nate Brewer, Danny Poff, and Emma Hopkins">
+    <meta name="generator" content="Hugo 0.122.0">
+    <title>Pet Shelter - Nate Brewer, Danny Poff, Emma Hopkins</title>
+
+    <!-- STYLE SHEET -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+    <!-- Where the json data is and functions -->
+    <script src="/assets/js/pets.js"></script>
+    
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+      .b-example-divider {
+        width: 100%;
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
+
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
+
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
+
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
+
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .btn-bd-primary {
+        --bd-violet-bg: #712cf9;
+        --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+        --bs-btn-font-weight: 600;
+        --bs-btn-color: var(--bs-white);
+        --bs-btn-bg: var(--bd-violet-bg);
+        --bs-btn-border-color: var(--bd-violet-bg);
+        --bs-btn-hover-color: var(--bs-white);
+        --bs-btn-hover-bg: #6528e0;
+        --bs-btn-hover-border-color: #6528e0;
+        --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+        --bs-btn-active-color: var(--bs-btn-hover-color);
+        --bs-btn-active-bg: #5a23c8;
+        --bs-btn-active-border-color: #5a23c8;
+      }
+
+      .bd-mode-toggle {
+        z-index: 1500;
+      }
+
+      .bd-mode-toggle .dropdown-menu .active .bi {
+        display: block !important;
+      }
+    </style>
+
+  </head>
+  <body data-bs-theme="dark">
+
+        <!-- Nav Bar -->
+    <header>
+      <div class="collapse text-bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4>About</h4>
+              <p class="text-body-secondary">This is a pet shelter website to make sure pets can get adopted and into a loving home</p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4>Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Follow on Twitter</a></li>
+                <li><a href="#" class="text-white">Like on Facebook</a></li>
+                <li><a href="#" class="text-white">Email me</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar shadow">
+        <div class="container">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            <strong>Pet Shelter ™</strong>
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+      <!-- End Nav Bar -->
+
+      <!-- Main -->
+    <main>
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+          <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Pets</h1>
+            <p class="lead text-body-secondary">Below are pets that are up for adoption, I think.</p>
+          </div>
+          <div class="d-flex justify-content-end align-content-center">
+            <button id="create" data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary">Create</button>
+          </div>
+        </div>
+      </section>
+
+      <!--create New Pet Modal-->
+      <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Pet Information</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <!-- New Pet input -->
+              <form id="myForm">
+                <input class="form-control m-1" type="text" name="name" placeholder="Enter name" />
+                <input class="form-control m-1" type="text" name="picture" placeholder="Enter Picture URL" />
+                <input class="form-control m-1" type="text" name="breed" placeholder="Enter Breed" />
+                <input class="form-control m-1" type="text" name="animal" placeholder="Enter type of animal" />
+                <input class="form-control m-1" type="text" name="gender" placeholder="Enter the animal's sex" />
+                <input class="form-control m-1" type="text" name="color" placeholder="Enter animal's color" />
+                <input class="form-control m-1" type="text" name="fixed" placeholder="Answer Yes or No for Spayed/Neutered" />
+                <input class="form-control m-1" type="text" name="age" placeholder="Enter age" />
+                <input class="form-control m-1" type="text" name="microchip" placeholder="Enter microchip number" />
+                <input class="form-control m-1" type="text" name="status" placeholder="Enter status" />
+                <input class="form-control m-1" type="text" name="bio" placeholder="Enter bio" />
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <!--save info into pets.js, will have to add id and data ourselves. Status may need to be broken up somehow-->
+              <button id="btn-task-save" type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+
+    <!--display Modal-->
+    <div class="modal fade" id="displayModal" tabindex="-1" aria-labelledby="displayModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h1 class="modal-title fs-5" id="petName"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p id="petColor">color: </p>
+            <p id="breed">Breed: </p>
+            <p id="sex">Sex: </p>
+            <p id="bio">Bio: </p>
+            <a id="petPage" href="">View page</a>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="btn-delete" type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+
+          <!-- This is where the javascript HTML will be placed-->
+          <div id="petThumbnail" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          </div>
+
+        </div>
+          <br />
+          <div class="d-flex justify-content-center align-content-center">
+            <button type="button" id="loadMore" class="btn btn-secondary">Load more</button>
+          </div>
+      </div>
+    </main>
+
+    <footer class="py-5 bg-dark text-white">
+      <div class="d-flex justify-content-center container">
+        
+        
+        <div class="text-center">
+          <p class="mb-0">© 2021 Pet Shelter ™</p>
+          <div class="mb-1">Danny Poff • Nate Brewer • Emma Hopkins</div>
+          <div class="mb-1">
+            <a href="#">Back to top</a>
+          </div>
+        </div>
+      </div>
+        
+    </footer>
+    
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+
+      // In pets.js - moves the array to a JSON file
+      if(getArrLength() == 0){
+        arrToJsonFile();
+      }
+
+      // Writes the HTML to the body of of the page from the JSON array
+      function displayHtml(html){
+        document.querySelector('#petThumbnail').innerHTML = html;
+      }
+
+
+      function load() {
+        let html ='';
+
+        for(let i = 0; i < 9; i++) {
+          //stops programm from reading too far and causing errors before printing.
+          //Also hides button
+          if(loaded >= getArrLength()) {
+            document.querySelector('#loadMore').style.display = "none";
+            break;
+          }
+
+          let pet = getPetFromJson(loaded);
+
+          let cardColor;
+
+          if(pet.Sex == "Female" || "female"){
+            //cardColor = '#FDC5F5';
+            cardIcon = `<i class="bi bi-gender-female h1"></i>`;
+          }
+          else if(pet.Sex == "Male" || "male"){
+            //cardColor = '#6EEDEB';
+            cardIcon = `<i class="bi bi-gender-male h1"></i>`;
+          } else {
+            //cardColor = '#ADADAD';
+            cardIcon = `<i class="bi bi-question-circle h1"></i>`; 
+          }
+          //id="${id}"
+
+          let htmlSegment =
+            `<div id="${loaded}"class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever="${loaded}">
+              <div class="card shadow border">
+                <div class=" m-4 mb-0">
+                  <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <image class="rounded" width="100%" height="100%" href="${pet.Pic}" alt="${pet.Name} the ${pet.Type}" / >
+                  </svg>
+                </div>
+                <div class="card-body mt-0 pt-0">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <strong class="text-body-primary">${pet.Name}</strong>
+                    <strong>${cardIcon}</strong>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">${pet.Type}</small>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">${pet.Age} years old</small>
+                  </div>
+                </div>
+              </div>
+           </div>`;
+
+          html += htmlSegment;
+          
+          //helps load more dynamically
+          loaded++;
+        }
+        return html;
+      }
+
+
+      var loaded = 0;
+
+      // Display pet info to displayModal
+      document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var petID = button.getAttribute('data-bs-whatever');
+
+        var pet = getPetFromJson(petID);
+
+        document.querySelector('#petName').innerText = pet.Name;
+        document.querySelector('#petColor').innerText = pet.Color;
+        document.querySelector('#breed').innerText = pet.Breed;
+        document.querySelector('#sex').innerText = pet.Sex;
+        document.querySelector('#bio').innerText = pet.Bio;
+        document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + petID + '">View page</a>';
+
+        // Delete button
+
+        document.querySelector("#btn-delete").addEventListener('click', function(){
+
+          // Removes the children
+          document.getElementById(petID).innerHTML = '';
+          // Removes the parent
+          document.getElementById(petID).remove();
+
+          // Removes the pet from the JSON Array
+          removeFromJson(petID);
+        })
+
+      });
+
+      //loads more content
+      document.querySelector('#loadMore').addEventListener('click', function() {
+        document.querySelector('#petThumbnail').innerHTML += load();
+      });
+
+      displayHtml(load());
+
+      // Code to read form content and send it to the json file  
+
+      const form = document.getElementById('myForm');
+
+      document.getElementById('btn-task-save').addEventListener('click', function () {
+        
+        console.log('Form submitted!');
+
+        const inputName = form.elements.name.value;
+        const inputPic = form.elements.picture.value;
+        const inputBreed = form.elements.breed.value;
+        const inputAnimal = form.elements.animal.value;
+        const inputGender = form.elements.gender.value;
+        const inputColor = form.elements.color.value;
+        const inputFixed = form.elements.fixed.value;
+        const inputAge = form.elements.age.value;
+        const inputMicrochip = form.elements.microchip.value;
+        const inputStatus = form.elements.status.value;
+        const inputBio = form.elements.bio.value;
+
+
+        const newPet = {
+          "Name": inputName,
+          "Pic": inputPic,
+          "Breed": inputBreed,
+          "Type": inputAnimal,
+          "Sex": inputGender,
+          "Color": inputColor,
+          "SpayedNeutered": inputFixed,
+          "Age": inputAge,
+          "ID": toString(parseInt(getLastArrID())+1),
+          "Microchip Number": inputMicrochip,
+          "DatePosted": "date",
+          "status": [
+              "Health checked", 
+              "Vaccinations up to date", 
+              "Regularly dewormed",
+              "Microchiped"
+          ],
+          "Status": inputStatus,
+          "Bio": inputBio
+        };
+        console.log('Name:', inputName);
+
+        // Assuming you have a function to save the pet data in pets.js
+        //savePetData(newPet);
+        addToJson(newPet);
+
+        // Reset the form after submission
+        form.reset();
+
+        //loads the created item if everything was alredy loaded
+        if(loaded>=getArrLength()-2) {
+          console.log('LOAD');
+          document.querySelector('#petThumbnail').innerHTML += load();
+        }
+      });
+    </script>
+  </body>
+</html>

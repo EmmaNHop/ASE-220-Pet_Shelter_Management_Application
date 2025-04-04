@@ -5,9 +5,18 @@
 const express = require('express');
 const app = express();
 
+const fs = require('fs');
+
+//      JSON Requests
+app.use(express.json());
+
+//      Static Routes
+app.use(express.static('public'));
+
+
 //      Define routes
 
-const petRoute = require('./routes/pets.js');
+const petRoute = require('./routes/pets');
 
 // Will send all HTTP requests will this path to pets.js
 app.use('/api/pets', petRoute);
@@ -15,7 +24,11 @@ app.use('/api/pets', petRoute);
 /* HTML ENDPOINTS */
 
 app.get('/', (req, res) => {
-    res.send("The index page");
+    try{    
+        res.send(fs.readFileSync('./index.html','utf-8'));
+    } catch(error){
+       return res.status(404).json({ error: "Page not found"});
+    }
 });
 
 
