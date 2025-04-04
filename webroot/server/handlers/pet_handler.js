@@ -7,32 +7,83 @@ const path = require('path');
 
 const filePath = path.join(__dirname, '..', 'data', 'pets.json');
 
+exports.fileWriter = async (content) => {
+    try{
+        fs.writeFile(filePath, JSON.stringify(content, null, 2));
+    } catch(error){
+        console.error('Error writing to file' + error);
+        throw new Error('Failed to write to file');
+    }
+}
+
 exports.getPets = async () => {
     try{
         const data = await fs.readFile(filePath, 'utf-8');
         return JSON.parse(data);
     } catch(error){
-        console.error(error);
+        console.error('Error getting pets' + error);
+        throw new error('Error retrieving pets');
     }
 }
 
 exports.createPet = async (newPet) => {
 
-    
-    const oldPets = await exports.getPets();
-
-    oldPets.push(newPet);
-    console.log(oldPets[oldPets.length-1]);
-    // TODO: write to pets.json
+    try{
+        const oldPets = await exports.getPets();
+        oldPets.push(newPet);
+        //console.log(oldPets[oldPets.length-1]);
+        // TODO: write to pets.json
+        exports.fileWriter(oldPets);
+    } catch (error) {
+        console.error('Error creating pet' + error);
+        throw new error('Error creating pet');
+    }
 
 }
 
-exports.editPet = async (updatedPet) => {
-    // TODO: retrieve pet and update info then write to pet
+exports.editPet = async (updatedPet, petId) => {
+
+    try{
+        const oldPets = await exports.getPets();
+        
+        oldPets.forEach((oldPet, index) => {
+
+            if(updatedPet.id === oldPet.id){
+
+                oldPets[index] = updatedPet;
+            
+                exports.fileWriter(oldPets);
+            }
+        });
+
+        //console.log(oldPets[oldPets.length-1]);
+    } catch (error) {
+        console.log(`Error editing pet with id${petId}` + error);
+        throw new error('Error creating pet');
+    }
 }
 
 exports.deletePet = async(pet) => {
     // TODO Retreive pets, find pet to delete, update json
+    try{
+        const oldPets = await exports.getPets();
+        //console.log(oldPets[oldPets.length-1]);
+        oldPets.forEach((oldPet, index) => {
+
+            if(pet.id === oldPet.id){
+
+                oldPets[index] = pet;
+            
+                exports.fileWriter(oldPets);
+
+            }
+
+        });
+        
+    } catch (error) {
+        console.log(`Error editing pet with id${petId}` + error);
+        throw new error('Error creating pet');
+    }
 }
 
 // Gets a pet type
@@ -71,7 +122,5 @@ exports.getPetById = async (id) => {
             return parsedType;
         }
     });
-
-    returns;
     
 }

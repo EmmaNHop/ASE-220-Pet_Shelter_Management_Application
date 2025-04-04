@@ -12,16 +12,16 @@ POST http://127.0.0.1:3000/api/pets
 Content-Type: application/json
 
 {
-    "name": "Patch",
+    "name": "Mr. Pete",
     "pic": "assets/images/bp-lot-1-siamese-color-outdoor.png",
-    "breed": "Mutt",
-    "type": "Dog",
-    "sex": "Female",
-    "color": "Black/White",
+    "breed": "Kitty",
+    "type": "Cat",
+    "sex": "Male",
+    "color": "White",
     "sprayedNeutered": "Yes",
-    "age": "11",
-    "id": "25836",
-    "microchipNumber": "q947568q450q9",
+    "age": "8",
+    "id": "23648905",
+    "microchipNumber": "562039485-33405",
     "datePosted": "2025-04-03",
     "status": [
       "Health checked",
@@ -29,7 +29,7 @@ Content-Type: application/json
       "Regularly dewormed",
       "Microchiped"
     ],
-    "bio": "Say hello to Patch, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
+    "bio": "Say hello to Mr. Pete, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
 }
 
 ###
@@ -43,7 +43,34 @@ GET http://127.0.0.1:3000/api/pets/?type=cat
 
 ###
 
-
+### Get pet by id
 GET http://127.0.0.1:3000/api/pets/76238
 
 ###
+GET http://127.0.0.1:3000/api/pets/
+
+###
+
+PUT http://127.0.0.1:3000/api/pets/23648905
+Content-Type: application/json
+
+{
+    "name": "Mr. Pete2",
+    "pic": "assets/images/bp-lot-1-siamese-color-outdoor.png",
+    "breed": "Kitty",
+    "type": "Cat",
+    "sex": "Male",
+    "color": "White",
+    "sprayedNeutered": "Yes",
+    "age": "8",
+    "id": "23648905",
+    "microchipNumber": "562039485-33405",
+    "datePosted": "2025-04-03",
+    "status": [
+      "Health checked",
+      "Vaccinations up to date",
+      "Regularly dewormed",
+      "Microchiped"
+    ],
+    "bio": "Say hello to Mr. Pete, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
+}

@@ -25,11 +25,11 @@ app.use('/api/pets', petRoute);
 
 app.get('/', (req, res) => {
     try{    
-        res.send(fs.readFileSync('./index.html','utf-8'));
+        res.send(fs.readFileSync('./public/index.html','utf-8'));
     } catch(error){
        return res.status(404).json({ error: "Page not found"});
     }
-});
+}); 
 
 
 // Exports app to other files for them to use require()
