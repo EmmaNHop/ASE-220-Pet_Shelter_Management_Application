@@ -6,4 +6,44 @@ GET http://127.0.0.1:3000/
 ### API Endpoints
 GET http://127.0.0.1:3000/api/pets
 
+
+###
+POST http://127.0.0.1:3000/api/pets
+Content-Type: application/json
+
+{
+    "name": "Patch",
+    "pic": "assets/images/bp-lot-1-siamese-color-outdoor.png",
+    "breed": "Mutt",
+    "type": "Dog",
+    "sex": "Female",
+    "color": "Black/White",
+    "sprayedNeutered": "Yes",
+    "age": "11",
+    "id": "25836",
+    "microchipNumber": "q947568q450q9",
+    "datePosted": "2025-04-03",
+    "status": [
+      "Health checked",
+      "Vaccinations up to date",
+      "Regularly dewormed",
+      "Microchiped"
+    ],
+    "bio": "Say hello to Patch, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
+}
+
+###
+
+GET http://127.0.0.1:3000/api/pets/?type=dog
+
+###
+
+
+GET http://127.0.0.1:3000/api/pets/?type=cat
+
+###
+
+
+GET http://127.0.0.1:3000/api/pets/76238
+
 ###
