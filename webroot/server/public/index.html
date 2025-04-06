@@ -218,8 +218,10 @@
         </div>
           <br />
           <div class="d-flex justify-content-center align-content-center">
-            <button type="button" id="loadMore" class="btn btn-secondary">Load more</button>
-          </div>
+            <button type="button" id="loadless" style="display: inline; margin-right: 10px;" class="btn btn-secondary">Load less</button>
+            <h2 id="pageNumber"></h2>
+            <button type="button" id="loadMore" style="display: inline; margin-left: 10px;" class="btn btn-secondary">Load more</button>
+        </div>
       </div>
     </main>
 
@@ -256,21 +258,22 @@
       }
 
       var loaded = 0;
+      var max;
+      document.querySelector('#pageNumber').innerHTML = 0;
 
-      async function load(loaded) {
-        let petList = await fetchPet();
+      async function load() {
+        //let petList = await fetchPet();
         let html ='';
 
         for(let i = 0; i < 9; i++) {
           //stops programm from reading too far and causing errors before printing.
           //Also hides button
-          if(loaded >= petList.length) {
-            document.querySelector('#loadMore').style.display = "none";
+          max = petList.length
+          if(loaded >= max) {
+            //document.querySelector('#loadMore').style.display = "none";
+            loaded += (9-i);
             break;
           }
-
-          console.log(petList[8]);
-          console.log(petList[10]);
 
           //let pet = getPetFromJson(loaded);
           let pet = petList[loaded];
@@ -350,12 +353,39 @@
 
       });
 
-      //loads more content
-      document.querySelector('#loadMore').addEventListener('click', function() {
-        document.querySelector('#petThumbnail').innerHTML += load();
+      //loads prior content
+      document.querySelector('#loadless').addEventListener('click', function() {
+        if(loaded >= 18) {
+          loaded -= 18;
+          let nextGroup = fetchPet().then((pets) => {
+            petList=pets;
+            displayHtml(load());
+            document.querySelector('#pageNumber').innerHTML--;
+          });
+
+          document.querySelector('#petThumbnail').innerHTML += nextGroup;
+        }
       });
 
-      displayHtml(load(loaded));
+      //loads more content
+      document.querySelector('#loadMore').addEventListener('click', function() {
+        if(loaded < max) {
+          let nextGroup = fetchPet().then((pets) => {
+            petList=pets;
+            displayHtml(load());
+            document.querySelector('#pageNumber').innerHTML++;
+          });
+
+          document.querySelector('#petThumbnail').innerHTML += nextGroup;
+        }
+      });
+
+      fetchPet().then((pets) => {
+        petList=pets;
+        displayHtml(load());
+      });
+
+      //displayHtml(load(loaded));
 
       // Code to read form content and send it to the json file  
 
