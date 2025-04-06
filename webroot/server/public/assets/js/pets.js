@@ -46,20 +46,17 @@ function addToJson(pet){
     
 }
 
-function jsonToObj(){
-
+function jsonToObj() {
     let array = localStorage.getItem('fullArray');
-
     return JSON.parse(array);
-}
+  }
 
-function getPetFromJson(index){
-
+  function getPetFromJson(index) {
     let obj = jsonToObj();
-
     return obj[index];
 
-}
+  }
+
 
 
 var arr = 

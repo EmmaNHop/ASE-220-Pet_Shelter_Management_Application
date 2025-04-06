@@ -398,5 +398,25 @@
       "Microchiped"
     ],
     "bio": "Say hello to Mr. Pete, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
+  },
+  {
+    "name": "Mr. Pete",
+    "pic": "assets/images/bp-lot-1-siamese-color-outdoor.png",
+    "breed": "Kitty",
+    "type": "Cat",
+    "sex": "Male",
+    "color": "White",
+    "sprayedNeutered": "Yes",
+    "age": "8",
+    "id": "23648905",
+    "microchipNumber": "562039485-33405",
+    "datePosted": "2025-04-03",
+    "status": [
+      "Health checked",
+      "Vaccinations up to date",
+      "Regularly dewormed",
+      "Microchiped"
+    ],
+    "bio": "Say hello to Mr. Pete, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
   }
 ]

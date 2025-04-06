@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head>
-    <script src="assets/js/color-modes.js"></script>
+    <!-- I do not know what this file is
+    <script src="assets/js/color-modes.js"></script> -->
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,7 +20,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.1.min.js"></script>
 
     <!-- Where the json data is and functions -->
-    <script src="/assets/js/pets.js"></script>
     
 
     <style>
@@ -144,7 +144,7 @@
         <div class="row py-lg-5">
           <div class="col-lg-6 col-md-8 mx-auto">
             <h1 class="fw-light">Pets</h1>
-            <p class="lead text-body-secondary">Below are pets that are up for adoption, I think.</p>
+            <p class="lead text-body-secondary">Below are pets that are up for adoption.</p>
           </div>
           <div class="d-flex justify-content-end align-content-center">
             <button id="create" data-bs-toggle="modal" data-bs-target="#createModal" class="btn btn-primary">Create</button>
@@ -208,8 +208,6 @@
         </div>
       </div>
     </div>
-
-
       <div class="album py-5 bg-body-tertiary">
         <div class="container">
 
@@ -239,42 +237,51 @@
       </div>
         
     </footer>
-    
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
 
     <script>
 
-      // In pets.js - moves the array to a JSON file
-      if(getArrLength() == 0){
-        arrToJsonFile();
+      // gets an array of all pets
+      async function fetchPet() {
+        let pet = await axios.get('http://127.0.0.1:3000/api/pets');
+        //console.log(pet.data);
+        return pet.data;
       }
 
       // Writes the HTML to the body of of the page from the JSON array
-      function displayHtml(html){
-        document.querySelector('#petThumbnail').innerHTML = html;
+      async function displayHtml(html){
+        document.querySelector('#petThumbnail').innerHTML = await html;
       }
 
+      var loaded = 0;
 
-      function load() {
+      async function load(loaded) {
+        let petList = await fetchPet();
         let html ='';
 
         for(let i = 0; i < 9; i++) {
           //stops programm from reading too far and causing errors before printing.
           //Also hides button
-          if(loaded >= getArrLength()) {
+          if(loaded >= petList.length) {
             document.querySelector('#loadMore').style.display = "none";
             break;
           }
 
-          let pet = getPetFromJson(loaded);
+          console.log(petList[8]);
+          console.log(petList[10]);
+
+          //let pet = getPetFromJson(loaded);
+          let pet = petList[loaded];
 
           let cardColor;
 
-          if(pet.Sex == "Female" || "female"){
+          if(pet.sex == "Female" || "female"){
             //cardColor = '#FDC5F5';
             cardIcon = `<i class="bi bi-gender-female h1"></i>`;
           }
-          else if(pet.Sex == "Male" || "male"){
+          else if(pet.sex == "Male" || "male"){
             //cardColor = '#6EEDEB';
             cardIcon = `<i class="bi bi-gender-male h1"></i>`;
           } else {
@@ -288,19 +295,19 @@
               <div class="card shadow border">
                 <div class=" m-4 mb-0">
                   <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                    <image class="rounded" width="100%" height="100%" href="${pet.Pic}" alt="${pet.Name} the ${pet.Type}" / >
+                    <image class="rounded" width="100%" height="100%" href="${pet.pic}" alt="${pet.name} the ${pet.type}" / >
                   </svg>
                 </div>
                 <div class="card-body mt-0 pt-0">
                   <div class="d-flex justify-content-between align-items-center">
-                    <strong class="text-body-primary">${pet.Name}</strong>
+                    <strong class="text-body-primary">${pet.name}</strong>
                     <strong>${cardIcon}</strong>
                   </div>
                   <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">${pet.Type}</small>
+                    <small class="text-muted">${pet.type}</small>
                   </div>
                   <div class="d-flex justify-content-between align-items-center">
-                    <small class="text-muted">${pet.Age} years old</small>
+                    <small class="text-muted">${pet.age} years old</small>
                   </div>
                 </div>
               </div>
@@ -313,9 +320,6 @@
         }
         return html;
       }
-
-
-      var loaded = 0;
 
       // Display pet info to displayModal
       document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
@@ -351,7 +355,7 @@
         document.querySelector('#petThumbnail').innerHTML += load();
       });
 
-      displayHtml(load());
+      displayHtml(load(loaded));
 
       // Code to read form content and send it to the json file  
 
@@ -410,6 +414,7 @@
           document.querySelector('#petThumbnail').innerHTML += load();
         }
       });
+      
     </script>
   </body>
 </html>
