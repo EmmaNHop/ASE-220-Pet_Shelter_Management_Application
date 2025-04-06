@@ -63,16 +63,16 @@ exports.editPet = async (updatedPet, petId) => {
     }
 }
 
-exports.deletePet = async(pet) => {
+exports.deletePet = async(petId) => {
     // TODO Retreive pets, find pet to delete, update json
     try{
         const oldPets = await exports.getPets();
         //console.log(oldPets[oldPets.length-1]);
         oldPets.forEach((oldPet, index) => {
 
-            if(pet.id === oldPet.id){
+            if(petId === oldPet.id){
 
-                oldPets[index] = pet;
+                oldPets.splice(index, 1);
             
                 exports.fileWriter(oldPets);
 

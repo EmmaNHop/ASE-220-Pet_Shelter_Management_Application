@@ -77,5 +77,10 @@ Content-Type: application/json
 
 
 ###
+
+DELETE http://127.0.0.1:3000/api/pets/23648905
+
+
+###
 PUT http://127.0.0.1:3000/api/pets/:id
 Content-Type: application/json

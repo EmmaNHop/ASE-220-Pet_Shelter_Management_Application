@@ -93,31 +93,18 @@ router.put('/:id', async (req, res) => {
 // Deletes a pet
 router.delete('/:id', async (req, res) =>{
 
-    // Sends the updated pet 
-    const pet = req.body;
-
-    console.log(pet);
-
-    const { id } = req.params.id;
-
-    // just validating the id, might be redundant
-    if(pet.id !== id){
-        console.log("Error: id's do not match");
-        res.status(400).json({error: "ID in url and from request body do not match"});
-        return;
-    }
+    console.log(req.params.id);
 
     try{
-        await petHandler.deletePet(pet);
-
-        res.json(pet);
+        await petHandler.deletePet(req.params.id);
+        res.status(204).json({ success: "Deleted pet" });
 
     }catch(error){
-        console.error(`Error editing pet with id: ${pet.id}\n` + error);
+        console.error(`Error deleting pet with id: ${req.params.id}\n` + error);
         res.status(500).json({ error: "Error deleting pet"});
     }
 
-})
+});
 
 // Gets the pet by id, since ids are unique
 router.get('/:id', async (req, res) => {
@@ -129,11 +116,11 @@ router.get('/:id', async (req, res) => {
     } catch (error){
         res.status(500).json({error : 'Failed to get pet'});
     }
-})
+});
 
 // Sends router to '../app.js'
 module.exports = router;
 /* This literally creates a route tied to the api endpoint 
     that is defined inside of ../app.js. This means any endpoint
-    with api/pets will be sent here.
+    with 'api/pets' will be sent here.
 */

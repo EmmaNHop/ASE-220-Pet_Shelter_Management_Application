@@ -246,7 +246,7 @@
     <script>
 
       // gets an array of all pets
-      async function fetchPet() {
+      async function fetchPets() {
         let pet = await axios.get('http://127.0.0.1:3000/api/pets');
         //console.log(pet.data);
         return pet.data;
@@ -255,6 +255,8 @@
       // Writes the HTML to the body of of the page from the JSON array
       async function displayHtml(html){
         document.querySelector('#petThumbnail').innerHTML = await html;
+        document.body.scrollTop = 0; // For Safari
+        document.documentElement.scrollTop = 0; // Chrome, Firefox, IE and Opera
       }
 
       var loaded = 0;
@@ -324,7 +326,7 @@
         var petID = button.getAttribute('data-bs-whatever');
         console.log(petID);
 
-        fetchPet().then((pets) => {
+        fetchPets().then((pets) => {
 
         document.querySelector('#petName').innerText = pets[petID].name;
         document.querySelector('#petColor').innerText = pets[petID].color;
@@ -339,7 +341,7 @@
 
         document.querySelector("#btn-delete").addEventListener('click', function(){
 
-          fetchPet().then((pets) => {
+          fetchPets().then((pets) => {
           // Removes the children
           document.getElementById(petID).innerHTML = '';
           // Removes the parent
@@ -347,6 +349,7 @@
 
           // Removes the pet from the JSON Array
           let id = pets[petID].id;
+          console.log(id);
           axios.delete(`http://127.0.0.1:3000/api/pets/${id}`)
             .then(function (response) {
               console.log(response);
@@ -363,7 +366,7 @@
       document.querySelector('#loadless').addEventListener('click', function() {
         if(loaded >= 18) {
           loaded -= 18;
-          let nextGroup = fetchPet().then((pets) => {
+          let nextGroup = fetchPets().then((pets) => {
             petList=pets;
             displayHtml(load());
             document.querySelector('#pageNumber').innerHTML--;
@@ -376,7 +379,7 @@
       //loads more content
       document.querySelector('#loadMore').addEventListener('click', function() {
         if(loaded < max) {
-          let nextGroup = fetchPet().then((pets) => {
+          let nextGroup = fetchPets().then((pets) => {
             petList=pets;
             displayHtml(load());
             document.querySelector('#pageNumber').innerHTML++;
@@ -386,7 +389,7 @@
         }
       });
 
-      fetchPet().then((pets) => {
+      fetchPets().then((pets) => {
         petList=pets;
         displayHtml(load());
       });
@@ -437,9 +440,7 @@
         };
         console.log('Name:', inputName);
 
-        // Assuming you have a function to save the pet data in pets.js
-        //savePetData(newPet);
-        addToJson(newPet);
+        // TODO : Put request to the server
 
         // Reset the form after submission
         form.reset();

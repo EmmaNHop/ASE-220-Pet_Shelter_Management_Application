@@ -1,25 +1,5 @@
 [
   {
-    "name": "Koda",
-    "pic": "assets/images/husky.png",
-    "breed": "Siberian Husky",
-    "type": "Dog",
-    "sex": "Female",
-    "color": "Black and White",
-    "sprayedNeutered": "Yes",
-    "age": "3",
-    "id": "76238",
-    "microchipNumber": "982000364789931",
-    "datePosted": "2024-01-15",
-    "status": [
-      "Health checked",
-      "Vaccinations up to date",
-      "Regularly dewormed",
-      "Microchiped"
-    ],
-    "bio": "Meet Koda, a high-energy and intelligent Siberian Husky who loves adventure! Koda was surrendered by her previous owner due to her need for an active lifestyle. She thrives on outdoor activities like running, hiking, and playing in the snow. Koda is very vocal and enjoys 'talking' to her humans. She would do best with an experienced owner who can provide her with plenty of exercise and mental stimulation."
-  },
-  {
     "name": "Oliver",
     "pic": "assets/images/bp-lot-1-siamese-color-outdoor.png",
     "breed": "Siamese",
@@ -418,6 +398,5 @@
       "Microchiped"
     ],
     "bio": "Say hello to Mr. Pete, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
-  },
-  {}
+  }
 ]
