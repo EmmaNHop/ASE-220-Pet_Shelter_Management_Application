@@ -14,8 +14,8 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
 
-        <script src="assets/js/color-modes.js"></script>
-        <script type="text/javascript" src="/assets/js/pets.js"></script>
+        <!--<script src="assets/js/color-modes.js"></script>-->
+        <!--<script type="text/javascript" src="./assets/js/pets.js"></script>-->
     </head>
     <body class="bg-dark text-white">
         <!-- Responsive navbar-->
@@ -115,50 +115,57 @@
               </div>
             </div>
         </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script>
 
             // This grabs the query string and will call the json file from pets.js and get the specific pet data from it 
             const urlParams = new URLSearchParams(window.location.search);
-            const myParam = urlParams.get('id');
-
-            // From pets.js
-            var petData = getPetFromJson(myParam);     
-
-            console.log(getPetFromJson(getArrLength()-1));       
+            const myParam = urlParams.get('id'); 
             
-            // Just to help expedite the process for ya
-            let petName = petData.Name;
-            let petType = petData.Type;
-            let petBreed = petData.Breed;
-            let petSex = petData.Sex;
-            let petAge = petData.Age;
-            let petColor = petData.Color;
-            let petBio = petData.Bio;
-            let petPic = petData.Pic;
-            let petSN = petData.SpayedNeutered;
-            let petStat = petData.status;
-            let petDate = petData.DatePosted;
-
-
-            var img = document.createElement("img");
-            img.src = petPic;
-
-            // This will change the image to the pet picture
-            document.getElementById("picture").src = petPic;
-
-            // This will change the HTML to the pet data
-            document.getElementById("name").innerHTML = petName;
-            document.getElementById("date").innerHTML = petDate;
-            document.getElementById("type").innerHTML = petType;
-            document.getElementById("breed").innerHTML = petBreed;
-            document.getElementById("bio").innerHTML = petBio;
-            document.getElementById("sex").innerHTML = petSex;
-            document.getElementById("age").innerHTML = petAge;
-            document.getElementById("color").innerHTML = petColor;
-            document.getElementById("sn").innerHTML = petSN;
-            for(let i = 0; i < petStat.length; i++){
-                document.getElementById("stat").innerHTML += petStat[i] + "<br>";
+            async function fetchPets() {
+                let pet = await axios.get('http://127.0.0.1:3000/api/pets');
+                //console.log(pet.data);
+                return pet.data;
             }
+
+            async function loadPet(pets) {
+                // Just to help expedite the process for ya
+                let petName = pets[myParam].name;
+                let petType = pets[myParam].type;
+                let petBreed = pets[myParam].breed;
+                let petSex = pets[myParam].sex;
+                let petAge = pets[myParam].age;
+                let petColor = pets[myParam].color;
+                let petBio = pets[myParam].bio;
+                let petPic = pets[myParam].pic;
+                let petSN = pets[myParam].spayedNeutered;
+                let petStat = pets[myParam].status;
+                let petDate = pets[myParam].datePosted;
+
+
+                var img = document.createElement("img");
+                img.src = petPic;
+
+                // This will change the image to the pet picture
+                document.getElementById("picture").src = petPic;
+
+                // This will change the HTML to the pet data
+                document.getElementById("name").innerHTML = petName;
+                document.getElementById("date").innerHTML = petDate;
+                document.getElementById("type").innerHTML = petType;
+                document.getElementById("breed").innerHTML = petBreed;
+                document.getElementById("bio").innerHTML = petBio;
+                document.getElementById("sex").innerHTML = petSex;
+                document.getElementById("age").innerHTML = petAge;
+                document.getElementById("color").innerHTML = petColor;
+                document.getElementById("sn").innerHTML = petSN;
+                for(let i = 0; i < petStat.length; i++){
+                    document.getElementById("stat").innerHTML += petStat[i] + "<br>";
+                }
+            }
+
+            fetchPets().then((pets) => { loadPet(pets); });
             
         </script>
         <!-- Bootstrap core JS-->
