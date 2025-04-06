@@ -262,7 +262,6 @@
       document.querySelector('#pageNumber').innerHTML = 0;
 
       async function load() {
-        //let petList = await fetchPet();
         let html ='';
 
         for(let i = 0; i < 9; i++) {
@@ -275,23 +274,18 @@
             break;
           }
 
-          //let pet = getPetFromJson(loaded);
           let pet = petList[loaded];
 
           let cardColor;
 
           if(pet.sex == "Female" || "female"){
-            //cardColor = '#FDC5F5';
             cardIcon = `<i class="bi bi-gender-female h1"></i>`;
           }
           else if(pet.sex == "Male" || "male"){
-            //cardColor = '#6EEDEB';
             cardIcon = `<i class="bi bi-gender-male h1"></i>`;
           } else {
-            //cardColor = '#ADADAD';
             cardIcon = `<i class="bi bi-question-circle h1"></i>`; 
           }
-          //id="${id}"
 
           let htmlSegment =
             `<div id="${loaded}"class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever="${loaded}">
@@ -328,30 +322,42 @@
       document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var petID = button.getAttribute('data-bs-whatever');
+        console.log(petID);
 
-        var pet = getPetFromJson(petID);
+        fetchPet().then((pets) => {
 
-        document.querySelector('#petName').innerText = pet.Name;
-        document.querySelector('#petColor').innerText = pet.Color;
-        document.querySelector('#breed').innerText = pet.Breed;
-        document.querySelector('#sex').innerText = pet.Sex;
-        document.querySelector('#bio').innerText = pet.Bio;
+        document.querySelector('#petName').innerText = pets[petID].name;
+        document.querySelector('#petColor').innerText = pets[petID].color;
+        document.querySelector('#breed').innerText = pets[petID].breed;
+        document.querySelector('#sex').innerText = pets[petID].sex;
+        document.querySelector('#bio').innerText = pets[petID].bio;
         document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + petID + '">View page</a>';
+
+        });
 
         // Delete button
 
         document.querySelector("#btn-delete").addEventListener('click', function(){
 
+          fetchPet().then((pets) => {
           // Removes the children
           document.getElementById(petID).innerHTML = '';
           // Removes the parent
           document.getElementById(petID).remove();
 
           // Removes the pet from the JSON Array
-          removeFromJson(petID);
-        })
-
+          let id = pets[petID].id;
+          axios.delete(`http://127.0.0.1:3000/api/pets/${id}`)
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+          });
+        });
       });
+
 
       //loads prior content
       document.querySelector('#loadless').addEventListener('click', function() {

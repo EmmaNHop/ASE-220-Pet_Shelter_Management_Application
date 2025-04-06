@@ -74,3 +74,8 @@ Content-Type: application/json
     ],
     "bio": "Say hello to Mr. Pete, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
 }
+
+
+###
+PUT http://127.0.0.1:3000/api/pets/:id
+Content-Type: application/json
