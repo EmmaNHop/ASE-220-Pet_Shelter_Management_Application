@@ -156,6 +156,16 @@
           <h1 class="fw-light">Pets</h1>
           <p class="lead text-body-secondary">Below are pets that are up for adoption.</p>
         </div>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Filter by type
+          </button>
+          <ul id="typeSelector" class="dropdown-menu">
+
+            <!--Types insert here-->
+
+          </ul>
+        </div>
         <div class="d-flex justify-content-end align-content-center">
           <button id="create" data-bs-toggle="modal" data-bs-target="#createModal"
             class="btn btn-primary">Create</button>
@@ -211,12 +221,18 @@
             <p id="breed">Breed: </p>
             <p id="sex">Sex: </p>
             <p id="bio">Bio: </p>
-            <a id="petPage" href="">View page</a>
+            
           </div>
           <div class="modal-footer">
-           
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn" style="display: hidden;"></button>
+            <button type="button" class="btn" style="display: hidden;"></button>
+            <button type="button" class="btn" style="display: hidden;"></button>
             <button id="btn-delete" type="button" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+            <button type="button" class="btn" style="display: hidden;"></button>
+            <button type="button" class="btn" style="display: hidden;"></button>
+            <button type="button" class="btn" style="display: hidden;"></button>
+            <button type="button" class="btn btn-primary" style="text-decoration: none;" id="petPage" href="" data-bs-dismiss="modal">View More</button>
           </div>
         </div>
       </div>
@@ -262,12 +278,40 @@
 
     var lastId = 0;
 
+    var petList = [];
+
+    var typeList = [];
+
+    var loaded = 0;
+    var max;
+
+    document.querySelector('#pageNumber').innerHTML = 1;
+
     // gets an array of all pets
     async function fetchPets() {
       let pet = await axios.get('http://127.0.0.1:3000/api/pets');
       //console.log(pet.data);
-      lastId = pet[pet.length];
+      lastId = pet[pet.data.length];
+      petList = pet.data;
       return pet.data;
+    }
+
+    async function fetchPetsByType(type){
+      if(type == 'All'){
+          fetchPets().then((pets) => {
+            loaded = 0;
+            document.querySelector('#pageNumber').innerHTML = 1;
+            petList = pets;
+            displayHtml(load());
+          });
+        }
+      else{
+        const response = await axios.get(`http://127.0.0.1:3000/api/pets/?type=${type}`);
+        const pets = response.data;
+        //console.log(response.data);
+        petList = pets;
+        displayHtml(load(petList));
+      }
     }
 
     // Writes the HTML to the body of of the page from the JSON array
@@ -277,14 +321,21 @@
       // Scrolls to the top
       document.body.scrollTop = 0; // For Safari
       document.documentElement.scrollTop = 0; // Chrome, Firefox, IE and Opera
+      
+      // Changes the state of the buttons
+      checkPageButtons();
     }
 
-    var loaded = 0;
-    var max;
-    document.querySelector('#pageNumber').innerHTML = 0;
+    async function load(pet) {
+      
+      // If a type was selected it would send the the load() function with data in the pet parameter
+      if(pet){
+        petList = pet;
+        console.log(petList);
+        loaded = 0;
+      }
 
-    async function load() {
-      let html = '';
+      let html ='';
 
       for (let i = 0; i < 9; i++) {
         //stops programm from reading too far and causing errors before printing.
@@ -300,17 +351,18 @@
 
         let cardColor;
 
-        if (pet.sex == "Female" || "female") {
+        if (pet.sex == "Female" || pet.sex == "female") {
           cardIcon = `<i class="bi bi-gender-female h1"></i>`;
         }
-        else if (pet.sex == "Male" || "male") {
+        else if (pet.sex == "Male" ||  pet.sex == "male") {
           cardIcon = `<i class="bi bi-gender-male h1"></i>`;
-        } else {
+        } 
+        else {
           cardIcon = `<i class="bi bi-question-circle h1"></i>`;
         }
 
         let htmlSegment =
-          `<div id="${loaded}"class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever="${loaded}">
+          `<div id="${pet.id}"class="col" data-bs-toggle="modal" data-bs-target="#displayModal" data-bs-whatever="${loaded}">
               <div class="card shadow border">
                 <div class=" m-4 mb-0">
                   <svg class="bd-placeholder-img card-img-top" width="100%" height="255" role="img" aria-label="Placeholder:  Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -337,28 +389,73 @@
         //helps load more dynamically
         loaded++;
       }
+
       return html;
     }
+
+    async function renderTypes(){
+
+      //console.log(petList);
+
+      // reads in the types of pets and capitalizes the first letter
+      petList.forEach(pet => {
+        petType = pet.type.toLowerCase();
+        typeList.push(petType.charAt(0).toUpperCase() + petType.slice(1));
+      });
+
+      // Gets unique types 
+      typeList = [... new Set(typeList)];
+
+      let typeHtml = `<li><a class="dropdown-item" id="typeAll">All</a></li>`;
+
+      typeList.forEach(type => {
+        typeHtml += `<li><a class="dropdown-item" id="type${type}">${type}</a></li>`
+      });
+
+      document.querySelector('#typeSelector').innerHTML = typeHtml;
+    }
+
+    // Dynamically changes the load more buttons
+    function checkPageButtons(){
+      // Removes the load more or load less buttons 
+      if(loaded >= max){
+        document.querySelector('#loadMore').style.display = 'none';
+      }else{
+        document.querySelector('#loadMore').style.display = '';
+      }
+
+      if(document.querySelector('#pageNumber').innerHTML == 1){
+        document.querySelector('#loadless').style.display = 'none';
+      } else{
+        document.querySelector('#loadless').style.display = '';
+      }
+    }
+    
+    fetchPets().then((pets) => {
+      petList = pets;
+      displayHtml(load());
+      renderTypes();
+    });
 
     // Display pet info to displayModal
     document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
       var button = event.relatedTarget;
-      var petID = button.getAttribute('data-bs-whatever');
-      console.log(petID);
+      var loadOrder = button.getAttribute('data-bs-whatever');
+      console.log(loadOrder);
 
       fetchPets().then((pets) => {
 
-        document.querySelector('#petName').innerText = pets[petID].name;
-        document.querySelector('#petColor').innerText = pets[petID].color;
-        document.querySelector('#breed').innerText = pets[petID].breed;
-        document.querySelector('#sex').innerText = pets[petID].sex;
-        document.querySelector('#bio').innerText = pets[petID].bio;
-        document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + petID + '">View page</a>';
+        document.querySelector('#petName').innerText = pets[loadOrder].name;
+        document.querySelector('#petColor').innerText = pets[loadOrder].color;
+        document.querySelector('#breed').innerText = pets[loadOrder].breed;
+        document.querySelector('#sex').innerText = pets[loadOrder].sex;
+        document.querySelector('#bio').innerText = pets[loadOrder].bio;
+        document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + pets[loadOrder].id + '">View page</a>';
 
       });
 
-      // Delete button
 
+      // Delete button
       document.querySelector("#btn-delete").addEventListener('click', function () {
 
         fetchPets().then((pets) => {
@@ -380,7 +477,6 @@
         });
       });
     });
-
 
     //loads prior content
     document.querySelector('#loadless').addEventListener('click', function () {
@@ -408,21 +504,18 @@
         document.querySelector('#petThumbnail').innerHTML += nextGroup;
       }
     });
-
-    fetchPets().then((pets) => {
-      petList = pets;
-      displayHtml(load());
-    });
-
-    //displayHtml(load(loaded));
-
- // Function to get the last ID from the petList array
-    function getLastArrID() {
-      if (petList && petList.length > 0) {
-        return petList[petList.length - 1].id;
+   
+    // This puts listeners on all dropdown-items for the types list since they are dynamically loaded
+    document.addEventListener('click', (event) => {
+      const target = event.target.closest('.dropdown-item');
+      if(target){
+        const selectedType = event.target.innerText;
+        //console.log(selectedType);
+        document.querySelector('#pageNumber').innerHtml = 1;
+        fetchPetsByType(selectedType);
       }
-      return 0; // Default to 0 if petList is empty or undefined
-    }
+    });
+  
 
     // Code to read form content and send it to the json file  
     const form = document.getElementById('myForm');
@@ -479,8 +572,6 @@
       document.querySelector('#petThumbnail').innerHTML += load();
       }
     });
-      
-    
       
   </script>
 </body>
