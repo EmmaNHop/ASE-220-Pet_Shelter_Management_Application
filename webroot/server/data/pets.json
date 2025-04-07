@@ -380,24 +380,40 @@
     "bio": "Say hello to Mr. Pete, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
   },
   {
-    "Name": "orphi",
-    "Pic": "https://media.zenfs.com/en/parade_250/f1f1782e75f1f5854edffd6be0a4d0c7",
-    "Breed": "big",
-    "Type": "cat",
-    "Sex": "male",
-    "Color": "grey",
-    "SpayedNeutered": "yes",
-    "Age": "2",
-    "ID": "23648906",
-    "Microchip Number": "ddd",
-    "DatePosted": "2025-04-07T01:09:43.466Z",
+    "name": "orphi",
+    "pic": "https://media.zenfs.com/en/parade_250/f1f1782e75f1f5854edffd6be0a4d0c7",
+    "breed": "big",
+    "type": "cat",
+    "sex": "male",
+    "color": "grey",
+    "spayedNeutered": "yes",
+    "age": "2",
+    "id": "23648906",
+    "microchip Number": "ddd",
+    "datePosted": "2025-04-07T01:09:43.466Z",
     "status": [
       "Health checked",
       "Vaccinations up to date",
       "Regularly dewormed",
       "Microchipped"
     ],
-    "Status": "healthy",
-    "Bio": "hes the bestest boy"
+    "bio": "hes the bestest boy"
+  },
+  {
+    "name": "Joe Mama",
+    "pic": "https://www.reddit.com/r/familyguy/comments/110p4mm/joes_mom_is_such_an_underrated_character/",
+    "breed": "Mam",
+    "type": "Mama",
+    "sex": "Female",
+    "color": "White",
+    "spayedNeutered": "Yes",
+    "age": "81",
+    "id": "NaN",
+    "microchipNumber": "123456",
+    "datePosted": "2025-04-07T15:47:28.326Z",
+    "status": [
+      "Healthy, Joe, Mama"
+    ],
+    "bio": "Joe is yo mama"
   }
 ]

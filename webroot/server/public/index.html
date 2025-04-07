@@ -260,16 +260,21 @@
 
   <script>
 
+    var lastId = 0;
+
     // gets an array of all pets
     async function fetchPets() {
       let pet = await axios.get('http://127.0.0.1:3000/api/pets');
       //console.log(pet.data);
+      lastId = pet[pet.length];
       return pet.data;
     }
 
     // Writes the HTML to the body of of the page from the JSON array
     async function displayHtml(html) {
       document.querySelector('#petThumbnail').innerHTML = await html;
+
+      // Scrolls to the top
       document.body.scrollTop = 0; // For Safari
       document.documentElement.scrollTop = 0; // Chrome, Firefox, IE and Opera
     }
@@ -370,7 +375,7 @@
               console.log(response);
             })
             .catch(function (error) {
-              console.log(error);
+              console.error(error);
             });
         });
       });
@@ -439,25 +444,21 @@
       const inputBio = form.elements.bio.value;
 
       const newPet = {
-      "Name": inputName,
-      "Pic": inputPic,
-      "Breed": inputBreed,
-      "Type": inputAnimal,
-      "Sex": inputGender,
-      "Color": inputColor,
-      "SpayedNeutered": inputFixed,
-      "Age": inputAge,
-      "ID": (parseInt(getLastArrID()) + 1).toString(),
-      "Microchip Number": inputMicrochip,
-      "DatePosted": new Date().toISOString(),
+      "name": inputName,
+      "pic": inputPic,
+      "breed": inputBreed,
+      "type": inputAnimal,
+      "sex": inputGender,
+      "color": inputColor,
+      "spayedNeutered": inputFixed,
+      "age": inputAge,
+      "id": (parseInt(lastId) + 1).toString(),
+      "microchipNumber": inputMicrochip,
+      "datePosted": new Date().toISOString(),
       "status": [
-        "Health checked",
-        "Vaccinations up to date",
-        "Regularly dewormed",
-        "Microchipped"
+        inputStatus
       ],
-      "Status": inputStatus,
-      "Bio": inputBio
+      "bio": inputBio
       };
       console.log('New Pet:', newPet);
 
