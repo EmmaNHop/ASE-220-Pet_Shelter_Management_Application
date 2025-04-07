@@ -30,11 +30,45 @@ const bio = inputBio.value;
 
 form.addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent default form submission behavior
-    // Access and process form data here
+    
     const name = form.elements.name.value;
     console.log('Name:', name);
   });
 
-
+  form.addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission behavior
+  
+    const formData = {
+      name: form.elements.name.value,
+      picture: form.elements.picture.value,
+      breed: form.elements.breed.value,
+      animal: form.elements.animal.value,
+      gender: form.elements.gender.value,
+      color: form.elements.color.value,
+      fixed: form.elements.fixed.value,
+      age: form.elements.age.value,
+      microchip: form.elements.microchip.value,
+      status: form.elements.status.value,
+      bio: form.elements.bio.value
+    };
+  
+    fetch('/pethandler', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(response => {
+      if (response.ok) {
+        console.log('Data successfully sent to pethandler.js');
+      } else {
+        console.error('Failed to send data to pethandler.js');
+      }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+  });
 
 

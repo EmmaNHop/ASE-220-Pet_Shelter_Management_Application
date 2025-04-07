@@ -1,173 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Pet page</title>
 
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="assets/css/detailStyles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Pet page</title>
 
-        <!--<script src="assets/js/color-modes.js"></script>-->
-        <!--<script type="text/javascript" src="./assets/js/pets.js"></script>-->
-    </head>
-    <body class="bg-dark text-white">
-        <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
-            <div class="container">
-                <a class="navbar-brand" href="#!">Pet Page</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    </ul>
-                </div>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="assets/css/detailStyles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+
+    <!--<script src="assets/js/color-modes.js"></script>-->
+    <!--<script type="text/javascript" src="./assets/js/pets.js"></script>-->
+</head>
+
+<body class="bg-dark text-white">
+    <!-- Responsive navbar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#!">Pet Page</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                </ul>
             </div>
-        </nav>
-        <!-- Page content-->
-         <main>
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!-- Post content-->
-                        <article>
-                            <!-- Post header-->
-                            <header class="mb-4">
-                                <!--Name of animal-->
-                                <h1 class="fw-bolder mb-1" id="name"></h1>
-                                <!-- Maybe deal with post date, would need another section in pets data or something-->
-                                <div class="text-muted fst-italic mb-2">Posted on <span class="small" id="date"></span></div>
-                                <!-- Animal Type-->
-                                
-                            </header>
-                            <!-- Preview image figure-->
-                            <figure class="mb-4 shadow border rounded border-2 border-secondary"><img class="img-fluid rounded" style="width:100%; height:auto;"id="picture" alt="..." /></figure>
-                        </article>
-                    </div>
-                    <!-- Side widgets-->
-                    <div class="col-lg-6 ">
-                        <!-- Bio-->
-                        <div class="card mb-4 bg-dark text-white border-secondary border-2 shadow">
-                            <div class="small m-3" id="bio"></div>
-                        </div>
-                        <!-- Side widget-->
-                        <div class="card mb-4 bg-dark text-white border-secondary border-2 shadow">
-                            <div class="card-header">Description</div>
-                            <div class="card-body m-1">
-                                
-                                <table class="table mb-0 text-white border-secondary">
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row" class="small fw-bolder">Animal:</th>
-                                            <td class="small" id="type"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="small fw-bolder">Breed:</th>
-                                            <td class="small" id="breed"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="small fw-bolder">Gender:</th>
-                                            <td class="small" id="sex"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="small fw-bolder">Age:</th>
-                                            <td class="small" id="age"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="small fw-bolder">Color:</th>
-                                            <td class="small" id="color"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="small fw-bolder">Spayed/Neutered:</th>
-                                            <td class="small" id="sn"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row" class="small fw-bolder">Health:</th>
-                                            <td class="small" id="stat"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+        </div>
+    </nav>
+    <!-- Page content-->
+    <main>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <button id="edit" data-bs-toggle="modal" data-bs-target="#editModal"
+                                class="btn btn-success">Edit</button>
+                            <!--Name of animal-->
+                            <h1 class="fw-bolder mb-1" id="name"></h1>
+                            <!-- Maybe deal with post date, would need another section in pets data or something-->
+                            <div class="text-muted fst-italic mb-2">Posted on <span class="small" id="date"></span>
                             </div>
+                            <!-- Animal Type-->
+
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4 shadow border rounded border-2 border-secondary"><img
+                                class="img-fluid rounded" style="width:100%; height:auto;" id="picture" alt="..." />
+                        </figure>
+                    </article>
+                </div>
+                <!-- Side widgets-->
+                <div class="col-lg-6 ">
+                    <!-- Bio-->
+                    <div class="card mb-4 bg-dark text-white border-secondary border-2 shadow">
+                        <div class="small m-3" id="bio"></div>
+                    </div>
+                    <!-- Side widget-->
+                    <div class="card mb-4 bg-dark text-white border-secondary border-2 shadow">
+                        <div class="card-header">Description</div>
+                        <div class="card-body m-1">
+
+                            <table class="table mb-0 text-white border-secondary">
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Animal:</th>
+                                        <td class="small" id="type"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Breed:</th>
+                                        <td class="small" id="breed"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Gender:</th>
+                                        <td class="small" id="sex"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Age:</th>
+                                        <td class="small" id="age"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Color:</th>
+                                        <td class="small" id="color"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Spayed/Neutered:</th>
+                                        <td class="small" id="sn"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="small fw-bolder">Health:</th>
+                                        <td class="small" id="stat"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-        <!-- Footer-->
-        <div class="py-5 bg-dark text-white">
-            <div class="d-flex justify-content-center container">
-              
-              <div class="text-center">
+        </div>
+    </main>
+
+    <!--edit Pet Modal-->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Pet Information</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- New Pet input -->
+                    <form id="myForm">
+                        <input class="form-control m-1" type="text" name="name" placeholder="Enter name" />
+                        <input class="form-control m-1" type="text" name="picture" placeholder="Enter Picture URL" />
+                        <input class="form-control m-1" type="text" name="breed" placeholder="Enter Breed" />
+                        <input class="form-control m-1" type="text" name="animal" placeholder="Enter type of animal" />
+                        <input class="form-control m-1" type="text" name="gender"
+                            placeholder="Enter the animal's sex" />
+                        <input class="form-control m-1" type="text" name="color" placeholder="Enter animal's color" />
+                        <input class="form-control m-1" type="text" name="fixed"
+                            placeholder="Answer Yes or No for Spayed/Neutered" />
+                        <input class="form-control m-1" type="text" name="age" placeholder="Enter age" />
+                        <input class="form-control m-1" type="text" name="microchip"
+                            placeholder="Enter microchip number" />
+                        <input class="form-control m-1" type="text" name="status" placeholder="Enter status" />
+                        <input class="form-control m-1" type="text" name="bio" placeholder="Enter bio" />
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <!--save info into pets.js, will have to add id and data ourselves. Status may need to be broken up somehow-->
+                    <button id="submit" type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer-->
+    <div class="py-5 bg-dark text-white">
+        <div class="d-flex justify-content-center container">
+
+            <div class="text-center">
                 <p class="mb-0">© 2021 Pet Shelter ™</p>
                 <div class="mb-1">Danny Poff • Nate Brewer • Emma Hopkins</div>
                 <div class="mb-1">
-                  <a href="#">Back to top</a>
+                    <a href="#">Back to top</a>
                 </div>
-              </div>
             </div>
         </div>
+    </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
 
-            // This grabs the query string and will call the json file from pets.js and get the specific pet data from it 
-            const urlParams = new URLSearchParams(window.location.search);
-            const myParam = urlParams.get('id'); 
-            
-            async function fetchPets() {
-                let pet = await axios.get('http://127.0.0.1:3000/api/pets');
-                //console.log(pet.data);
-                return pet.data;
+        // This grabs the query string and will call the json file from pets.js and get the specific pet data from it 
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('id');
+
+        async function fetchPets() {
+            let pet = await axios.get('http://127.0.0.1:3000/api/pets');
+            //console.log(pet.data);
+            return pet.data;
+        }
+
+        async function loadPet(pets) {
+            // Just to help expedite the process for ya
+            let petName = pets[myParam].name;
+            let petType = pets[myParam].type;
+            let petBreed = pets[myParam].breed;
+            let petSex = pets[myParam].sex;
+            let petAge = pets[myParam].age;
+            let petColor = pets[myParam].color;
+            let petBio = pets[myParam].bio;
+            let petPic = pets[myParam].pic;
+            let petSN = pets[myParam].spayedNeutered;
+            let petStat = pets[myParam].status;
+            let petDate = pets[myParam].datePosted;
+
+
+            var img = document.createElement("img");
+            img.src = petPic;
+
+            // This will change the image to the pet picture
+            document.getElementById("picture").src = petPic;
+
+            // This will change the HTML to the pet data
+            document.getElementById("name").innerHTML = petName;
+            document.getElementById("date").innerHTML = petDate;
+            document.getElementById("type").innerHTML = petType;
+            document.getElementById("breed").innerHTML = petBreed;
+            document.getElementById("bio").innerHTML = petBio;
+            document.getElementById("sex").innerHTML = petSex;
+            document.getElementById("age").innerHTML = petAge;
+            document.getElementById("color").innerHTML = petColor;
+            document.getElementById("sn").innerHTML = petSN;
+            for (let i = 0; i < petStat.length; i++) {
+                document.getElementById("stat").innerHTML += petStat[i] + "<br>";
             }
+        }
 
-            async function loadPet(pets) {
-                // Just to help expedite the process for ya
-                let petName = pets[myParam].name;
-                let petType = pets[myParam].type;
-                let petBreed = pets[myParam].breed;
-                let petSex = pets[myParam].sex;
-                let petAge = pets[myParam].age;
-                let petColor = pets[myParam].color;
-                let petBio = pets[myParam].bio;
-                let petPic = pets[myParam].pic;
-                let petSN = pets[myParam].spayedNeutered;
-                let petStat = pets[myParam].status;
-                let petDate = pets[myParam].datePosted;
+        fetchPets().then((pets) => { loadPet(pets); });
+
+        // Function to handle editing a pet
+        document.getElementById('edit').addEventListener('click', function () {
+            const petID = document.querySelector('#petName').getAttribute('data-id'); // Assuming petName has a data-id attribute
+            const updatedPet = {
+                name: form.elements.name.value,
+                picture: form.elements.picture.value,
+                breed: form.elements.breed.value,
+                animal: form.elements.animal.value,
+                gender: form.elements.gender.value,
+                color: form.elements.color.value,
+                fixed: form.elements.fixed.value,
+                age: form.elements.age.value,
+                microchip: form.elements.microchip.value,
+                status: form.elements.status.value,
+                bio: form.elements.bio.value
+            };
+
+            axios.put(`http://127.0.0.1:3000/api/pets/${petID}`, updatedPet)
+                .then(response => {
+                    console.log('Pet successfully updated:', response.data);
+                    // Optionally refresh the pet list or update the UI
+                })
+                .catch(error => {
+                    console.error('Error updating pet:', error);
+                });
+        });
 
 
-                var img = document.createElement("img");
-                img.src = petPic;
+    </script>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="assets/js/detailScripts.js"></script>
+</body>
 
-                // This will change the image to the pet picture
-                document.getElementById("picture").src = petPic;
-
-                // This will change the HTML to the pet data
-                document.getElementById("name").innerHTML = petName;
-                document.getElementById("date").innerHTML = petDate;
-                document.getElementById("type").innerHTML = petType;
-                document.getElementById("breed").innerHTML = petBreed;
-                document.getElementById("bio").innerHTML = petBio;
-                document.getElementById("sex").innerHTML = petSex;
-                document.getElementById("age").innerHTML = petAge;
-                document.getElementById("color").innerHTML = petColor;
-                document.getElementById("sn").innerHTML = petSN;
-                for(let i = 0; i < petStat.length; i++){
-                    document.getElementById("stat").innerHTML += petStat[i] + "<br>";
-                }
-            }
-
-            fetchPets().then((pets) => { loadPet(pets); });
-            
-        </script>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="assets/js/detailScripts.js"></script>
-    </body>
 </html>

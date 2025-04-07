@@ -180,26 +180,6 @@
     "bio": "Meet Doug, a high-energy and intelligent Siberian Husky who loves adventure! Koda was surrendered by his previous owner due to his need for an active lifestyle. He thrives on outdoor activities like running, hiking, and playing in the snow. Doug is very vocal and enjoys 'talking' to his humans. He would do best with an experienced owner who can provide him with plenty of exercise and mental stimulation."
   },
   {
-    "name": "Olivia",
-    "pic": "assets/images/bp-lot-1-siamese-color-outdoor.png",
-    "breed": "Siamese",
-    "type": "Cat",
-    "sex": "Female",
-    "color": "Seal Point",
-    "sprayedNeutered": "Yes",
-    "age": "2",
-    "id": "59822",
-    "microchipNumber": "982000364789643",
-    "datePosted": "2024-02-01",
-    "status": [
-      "Health checked",
-      "Vaccinations up to date",
-      "Regularly dewormed",
-      "Microchiped"
-    ],
-    "bio": "Say hello to Olivia, a chatty and affectionate Siamese cat with striking blue eyes. Olivia loves to follow her humans around the house and 'talk' to them with her signature meows. She enjoys puzzle toys, warm sunspots, and cuddling under blankets. Olivia does best in a home where she gets plenty of attention and interaction."
-  },
-  {
     "name": "Pear",
     "pic": "./assets/images/pig.webp",
     "breed": "Abyssinian",
@@ -398,5 +378,26 @@
       "Microchiped"
     ],
     "bio": "Say hello to Mr. Pete, a chatty and affectionate Siamese cat with striking blue eyes. Oliver loves to follow his humans around the house and 'talk' to them with his signature meows. He enjoys puzzle toys, warm sunspots, and cuddling under blankets. Oliver does best in a home where he gets plenty of attention and interaction."
+  },
+  {
+    "Name": "orphi",
+    "Pic": "https://media.zenfs.com/en/parade_250/f1f1782e75f1f5854edffd6be0a4d0c7",
+    "Breed": "big",
+    "Type": "cat",
+    "Sex": "male",
+    "Color": "grey",
+    "SpayedNeutered": "yes",
+    "Age": "2",
+    "ID": "23648906",
+    "Microchip Number": "ddd",
+    "DatePosted": "2025-04-07T01:09:43.466Z",
+    "status": [
+      "Health checked",
+      "Vaccinations up to date",
+      "Regularly dewormed",
+      "Microchipped"
+    ],
+    "Status": "healthy",
+    "Bio": "hes the bestest boy"
   }
 ]

@@ -33,6 +33,8 @@ exports.createPet = async (newPet) => {
         oldPets.push(newPet);
         //console.log(oldPets[oldPets.length-1]);
         // TODO: write to pets.json
+        
+
         exports.fileWriter(oldPets);
     } catch (error) {
         console.error('Error creating pet' + error);
