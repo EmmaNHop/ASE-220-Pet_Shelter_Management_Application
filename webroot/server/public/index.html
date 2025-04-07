@@ -295,12 +295,15 @@
 
         let cardColor;
 
+        console.log(pet.name + " " + pet.sex);
         if (pet.sex == "Female" || "female") {
+          console.log(pet.sex == "Female" || "female");
           cardIcon = `<i class="bi bi-gender-female h1"></i>`;
-        }
-        else if (pet.sex == "Male" || "male") {
+        } else if (pet.sex == "Male" || "male") {
+          console.log(pet.sex == "Male" || "male");
           cardIcon = `<i class="bi bi-gender-male h1"></i>`;
         } else {
+          console.log("???");
           cardIcon = `<i class="bi bi-question-circle h1"></i>`;
         }
 

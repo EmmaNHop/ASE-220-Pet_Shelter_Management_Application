@@ -208,7 +208,27 @@
             }
         }
 
+        async function loadEditModal(pets) {
+            let stat = "";
+            for (let i = 0; i < pets[myParam].status.length; i++) {
+                stat += pets[myParam].status[i] + ";";
+            }
+            document.getElementById("myForm").innerHTML = 
+            `<input class="form-control m-1" type="text" name="name" placeholder="${pets[myParam].name}" />
+            <input class="form-control m-1" type="text" name="picture" placeholder="${pets[myParam].pic}" />
+            <input class="form-control m-1" type="text" name="breed" placeholder="${pets[myParam].breed}" />
+            <input class="form-control m-1" type="text" name="animal" placeholder="${pets[myParam].type}" />
+            <input class="form-control m-1" type="text" name="gender" placeholder="${pets[myParam].sex}" />
+            <input class="form-control m-1" type="text" name="color" placeholder="${pets[myParam].color}" />
+            <input class="form-control m-1" type="text" name="fixed" placeholder="${pets[myParam].spayedNeutered}" />
+            <input class="form-control m-1" type="text" name="age" placeholder="${pets[myParam].age}" />
+            <input class="form-control m-1" type="text" name="microchip" placeholder="${pets[myParam].microchipNumber}" />
+            <input class="form-control m-1" type="text" name="status" placeholder="${stat}" />
+            <input class="form-control m-1" type="text" name="bio" placeholder="${pets[myParam].bio}" />`
+        }
+
         fetchPets().then((pets) => { loadPet(pets); });
+        fetchPets().then((pets) => { loadEditModal(pets); });
 
         // Function to handle editing a pet
         document.getElementById('edit').addEventListener('click', function () {
