@@ -1,9 +1,7 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="auto">
 
 <head>
-  <!-- I do not know what this file is
-    <script src="assets/js/color-modes.js"></script> -->
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -184,19 +182,56 @@
           <div class="modal-body">
             <!-- New Pet input -->
             <form id="myForm">
-              <input class="form-control m-1" type="text" name="name" placeholder="Enter name" />
-              <input class="form-control m-1" type="text" name="picture" placeholder="Enter Picture URL" />
-              <input class="form-control m-1" type="text" name="breed" placeholder="Enter Breed" />
-              <input class="form-control m-1" type="text" name="animal" placeholder="Enter type of animal" />
-              <input class="form-control m-1" type="text" name="gender" placeholder="Enter the animal's sex" />
-              <input class="form-control m-1" type="text" name="color" placeholder="Enter animal's color" />
-              <input class="form-control m-1" type="text" name="fixed"
-                placeholder="Answer Yes or No for Spayed/Neutered" />
-              <input class="form-control m-1" type="text" name="age" placeholder="Enter age" />
-              <input class="form-control m-1" type="text" name="microchip" placeholder="Enter microchip number" />
-              <input class="form-control m-1" type="text" name="status" placeholder="Enter status" />
-              <input class="form-control m-1" type="text" name="bio" placeholder="Enter bio" />
-            </form>
+              <div class="row">
+                  <div class="col-6">
+                      <input class="form-control m-1" type="text" id="form-name" name="name" placeholder="Enter name" />
+                      <input class="form-control m-1" type="text" id="form-breed" name="breed" placeholder="Enter Breed" />
+                      <input class="form-control m-1" type="text" id="form-type" name="type" placeholder="Enter type of animal" />
+                      <div class="row">
+                          <div class="col-2">
+                              Sex:
+                          </div>
+                          <div class="col-2">
+                              <input class="form-check-input" type="radio" name="sex" id="sexMale" value="Male"/>
+                              <label class="form-check-label" for="sexMale">Male</label>
+                          </div>
+                          <div class="col-3">
+                              <input class="form-check-input" type="radio" name="sex" id="sexFemale" value="Female"/>
+                              <label class="form-check-label" for="sexFemale">Female</label>
+                          </div>
+                          <div class="col-5">
+                              <input class="form-check-input" type="radio" name="sex" id="sexUnknown" value="Unknown"/>
+                              <label class="form-check-label" for="sexUnknown">Unknown</label>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-6">
+                      <input class="form-control m-1" type="text" id="form-color" name="color" placeholder="Enter animal's color" />
+                      <input class="form-control m-1" type="text" id="form-microchip" name="microchip" placeholder="Enter microchip number" />
+                      <input class="form-control m-1" type="text" id="form-age" name="age" placeholder="Enter age" />
+                      <div class="row">
+                          <div class="col-3">
+                              Fixed:
+                          </div>
+                          <div class="col-2">
+                              <input class="form-check-input" type="radio" name="fixed" id="fixedYes">
+                              <label class="form-check-label" name="fixed">Yes</label>
+                          </div>
+                          <div class="col-2">
+                              <input class="form-check-input" type="radio" name="fixed" id="fixedNo">
+                              <label class="form-check-label" name="fixed">No</label>
+                          </div>
+                          <div class="col-4">
+                              <input class="form-check-input" type="radio" name="fixed" id="unknown">
+                              <label class="form-check-label" name="fixed">Unknown</label>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <input class="form-control m-1" type="text" id="form-picture" name="picture" placeholder="Enter Picture URL" />
+              <textarea class="form-control m-1" type="text" id="form-status" name="status" placeholder="Enter status" rows="3"></textarea>
+              <textarea class="form-control m-1" type="textarea" id="form-bio" name="bio" placeholder="Enter bio" rows="8"></textarea>
+          </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -283,6 +318,7 @@
     var typeList = [];
 
     var loaded = 0;
+
     var max;
 
     document.querySelector('#pageNumber').innerHTML = 1;
@@ -290,9 +326,13 @@
     // gets an array of all pets
     async function fetchPets() {
       let pet = await axios.get('http://127.0.0.1:3000/api/pets');
-      //console.log(pet.data);
-      lastId = pet[pet.data.length];
+      lastId = parseInt(pet.data[pet.data.length-1].id);
       petList = pet.data;
+      return pet.data;
+    }
+
+    async function fetchPet(id) {
+      let pet = await axios.get(`http://127.0.0.1:3000/api/pets/${id}`);
       return pet.data;
     }
 
@@ -333,6 +373,7 @@
         petList = pet;
         console.log(petList);
         loaded = 0;
+
       }
 
       let html ='';
@@ -440,43 +481,41 @@
     // Display pet info to displayModal
     document.querySelector('#displayModal').addEventListener('show.bs.modal', function (event) {
       var button = event.relatedTarget;
-      var loadOrder = button.getAttribute('data-bs-whatever');
-      console.log(loadOrder);
+      var loadOrder = button.getAttribute('id');
 
-      fetchPets().then((pets) => {
+      fetchPet(loadOrder).then((pet) => {
 
-        document.querySelector('#petName').innerText = pets[loadOrder].name;
-        document.querySelector('#petColor').innerText = pets[loadOrder].color;
-        document.querySelector('#breed').innerText = pets[loadOrder].breed;
-        document.querySelector('#sex').innerText = pets[loadOrder].sex;
-        document.querySelector('#bio').innerText = pets[loadOrder].bio;
-        document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + pets[loadOrder].id + '">View page</a>';
+        document.querySelector('#petName').innerText = pet.name;
+        document.querySelector('#petColor').innerText = pet.color;
+        document.querySelector('#breed').innerText = pet.breed;
+        document.querySelector('#sex').innerText = pet.sex;
+        document.querySelector('#bio').innerText = pet.bio;
+        document.querySelector('#petPage').innerHTML = '<a id="petPage" href="detailPage.html?id=' + pet.id + '">View page</a>';
+        console.log("Load Order: " + loadOrder + " | ID:" + pet.id);
 
-      });
+        // Delete button
+        document.querySelector("#btn-delete").addEventListener('click', function () {
 
+        // Removes the children
+        document.getElementById(pet.id).innerHTML = '';
+        // Removes the parent
+        document.getElementById(pet.id).remove();
 
-      // Delete button
-      document.querySelector("#btn-delete").addEventListener('click', function () {
-
-        fetchPets().then((pets) => {
-          // Removes the children
-          document.getElementById(petID).innerHTML = '';
-          // Removes the parent
-          document.getElementById(petID).remove();
-
-          // Removes the pet from the JSON Array
-          let id = pets[petID].id;
-          console.log(id);
-          axios.delete(`http://127.0.0.1:3000/api/pets/${id}`)
-            .then(function (response) {
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.error(error);
-            });
+        // Removes the pet from the JSON Array
+        let id = pet.id;
+        console.log(id);
+        axios.delete(`http://127.0.0.1:3000/api/pets/${id}`)
+          .then(function (response) {
+            console.log(response);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
         });
       });
     });
+
+
 
     //loads prior content
     document.querySelector('#loadless').addEventListener('click', function () {
@@ -527,8 +566,8 @@
       const inputName = form.elements.name.value;
       const inputPic = form.elements.picture.value;
       const inputBreed = form.elements.breed.value;
-      const inputAnimal = form.elements.animal.value;
-      const inputGender = form.elements.gender.value;
+      const inputType = form.elements.type.value;
+      const inputGender = form.elements.sex.value;
       const inputColor = form.elements.color.value;
       const inputFixed = form.elements.fixed.value;
       const inputAge = form.elements.age.value;
@@ -540,14 +579,14 @@
       "name": inputName,
       "pic": inputPic,
       "breed": inputBreed,
-      "type": inputAnimal,
+      "type": inputType,
       "sex": inputGender,
       "color": inputColor,
       "spayedNeutered": inputFixed,
       "age": inputAge,
-      "id": (parseInt(lastId) + 1).toString(),
+      "id": lastId + 1,
       "microchipNumber": inputMicrochip,
-      "datePosted": new Date().toISOString(),
+      "datePosted": new Date(),
       "status": [
         inputStatus
       ],

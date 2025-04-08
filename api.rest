@@ -44,7 +44,7 @@ GET http://127.0.0.1:3000/api/pets/?type=cat
 ###
 
 ### Get pet by id
-GET http://127.0.0.1:3000/api/pets/76238
+GET http://127.0.0.1:3000/api/pets/:id
 
 ###
 GET http://127.0.0.1:3000/api/pets/
