@@ -121,20 +121,23 @@
                 <div class="modal-body">
                     <!-- New Pet input -->
                     <form id="myForm">
-                        <input class="form-control m-1" type="text" id="form-name" name="name" placeholder="Enter name" />
+                        <div class="row">
+                            <div class="col-6">
+                                <input class="form-control m-1" type="text" id="form-name" name="name" placeholder="Enter name" />
+                                <input class="form-control m-1" type="text" id="form-breed" name="breed" placeholder="Enter Breed" />
+                                <input class="form-control m-1" type="text" id="form-type" name="type" placeholder="Enter type of animal" />
+                                <input class="form-control m-1" type="text" id="form-sex" name="sex" placeholder="Enter the animal's sex" />
+                            </div>
+                            <div class="col-6">
+                                <input class="form-control m-1" type="text" id="form-color" name="color" placeholder="Enter animal's color" />
+                                <input class="form-control m-1" type="text" id="form-fixed" name="fixed" placeholder="Answer Yes or No for Spayed/Neutered" />
+                                <input class="form-control m-1" type="text" id="form-age" name="age" placeholder="Enter age" />
+                                <input class="form-control m-1" type="text" id="form-microchip" name="microchip" placeholder="Enter microchip number" />
+                            </div>
+                        </div>
                         <input class="form-control m-1" type="text" id="form-picture" name="picture" placeholder="Enter Picture URL" />
-                        <input class="form-control m-1" type="text" id="form-breed" name="breed" placeholder="Enter Breed" />
-                        <input class="form-control m-1" type="text" id="form-type" name="type" placeholder="Enter type of animal" />
-                        <input class="form-control m-1" type="text" id="form-sex" name="sex"
-                            placeholder="Enter the animal's sex" />
-                        <input class="form-control m-1" type="text" id="form-color" name="color" placeholder="Enter animal's color" />
-                        <input class="form-control m-1" type="text" id="form-fixed" name="fixed"
-                            placeholder="Answer Yes or No for Spayed/Neutered" />
-                        <input class="form-control m-1" type="text" id="form-age" name="age" placeholder="Enter age" />
-                        <input class="form-control m-1" type="text" id="form-microchip" name="microchip"
-                            placeholder="Enter microchip number" />
-                        <input class="form-control m-1" type="text" id="form-status" name="status" placeholder="Enter status" />
-                        <input class="form-control m-1" type="text" id="form-bio" name="bio" placeholder="Enter bio" />
+                        <textarea class="form-control m-1" type="text" id="form-status" name="status" placeholder="Enter status" rows="3"></textarea>
+                        <textarea class="form-control m-1" type="textarea" id="form-bio" name="bio" placeholder="Enter bio" rows="8"></textarea>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -182,7 +185,7 @@
             let petColor = pet.color;
             let petBio = pet.bio;
             let petPic = pet.pic;
-            let petSN = pet.sprayedNeutered;
+            let petSN = pet.spayedNeutered;
             let petStat = pet.status;
             let petDate = pet.datePosted;
 
@@ -203,50 +206,36 @@
             document.getElementById("age").innerHTML = petAge;
             document.getElementById("color").innerHTML = petColor;
             document.getElementById("sn").innerHTML = petSN;
-            for (let i = 0; i < petStat.length; i++) {
+            for (let i = 0; i < petStat.length-1; i++) {
                 document.getElementById("stat").innerHTML += petStat[i] + "<br>";
             }
+            document.getElementById("stat").innerHTML += petStat[petStat.length-1];
         }
 
         async function loadEditModal() {
-            console.log(document.getElementById("name").innerHTML);
 
-            let stat = "";
+            var stat = "";
             let statContent = document.getElementById("stat").childNodes;
-            for (let i = 0; i < statContent.length; i++) {
+            for (let i = 0; i < statContent.length-1; i++) {
                 if(statContent[i].localName == "br"){    
                 } else {
                     stat += statContent[i].data + ", ";
                 }
-                //stat += pet.status[i] + ";";
             }
-            /*
-            document.getElementById("myForm").innerHTML = 
-                `<input class="form-control m-1" type="text" name="name" placeholder="${document.getElementById("name").innerHTML}" />
-                <input class="form-control m-1" type="text" name="breed" placeholder="${document.getElementById("breed").innerHTML}" />
-                <input class="form-control m-1" type="text" name="animal" placeholder="${document.getElementById("type").innerHTML}" />
-                <input class="form-control m-1" type="text" name="gender" placeholder="${document.getElementById("sex").innerHTML}" />
-                <input class="form-control m-1" type="text" name="color" placeholder="${document.getElementById("color").innerHTML}" />
-                <input class="form-control m-1" type="text" name="fixed" placeholder="${document.getElementById("sn").innerHTML}" />
-                <input class="form-control m-1" type="text" name="age" placeholder="${document.getElementById("age").innerHTML}" />
-                <input class="form-control m-1" type="text" name="status" placeholder="${stat}" />
-                <input class="form-control m-1" type="text" name="bio" placeholder="${document.getElementById("bio").innerHTML}" />`;
-        */
+            stat += statContent[statContent.length-1].data;
+            
+            document.getElementById("form-name").value = document.getElementById("name").innerHTML; 
+            document.getElementById("form-picture").value = document.getElementById("picture").src; //assuming
+            document.getElementById("form-breed").value = document.getElementById("breed").innerHTML;
+            document.getElementById("form-type").value = document.getElementById("type").innerHTML;
+            document.getElementById("form-sex").value = document.getElementById("sex").innerHTML;
+            document.getElementById("form-color").value = document.getElementById("color").innerHTML;
+            document.getElementById("form-fixed").value = document.getElementById("sn").innerHTML;
+            document.getElementById("form-age").value = document.getElementById("age").innerHTML;  
 
-
-document.getElementById("form-name").value = document.getElementById("name").innerHTML; 
-document.getElementById("form-picture").value = document.getElementById("picture").innerHTML;
-document.getElementById("form-breed").value = document.getElementById("breed").innerHTML;
-document.getElementById("form-type").value = document.getElementById("type").innerHTML;
-document.getElementById("form-sex").value = document.getElementById("sex").innerHTML;
-document.getElementById("form-color").value = document.getElementById("color").innerHTML;
-document.getElementById("form-fixed").value = document.getElementById("sn").innerHTML;
-document.getElementById("form-age").value = document.getElementById("age").innerHTML;       
-document.getElementById("form-bio").value = document.getElementById("bio").innerHTML;     
-document.getElementById("form-bio").value = "${stat}";  
-
-
-console.log(document.getElementById("form-name").innerText);
+            document.getElementById("form-status").value = `${stat}`; 
+            document.getElementById("form-bio").value = document.getElementById("bio").innerHTML;     
+ 
 
         }
 
