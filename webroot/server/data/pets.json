@@ -240,26 +240,6 @@
     "bio": "Say hello to Shellbert, a calm and easygoing Russian Tortoise who loves basking in the sun. Shellbert was rehomed when his previous owner moved and couldn’t take him along. He enjoys munching on leafy greens and digging in his enclosure. With proper care, Shellbert could live for many more years and would love a dedicated owner who understands his needs."
   },
   {
-    "name": "Sol",
-    "pic": "assets/images/MainCoon.jpg",
-    "breed": "Maine Coon",
-    "type": "Cat",
-    "sex": "Male",
-    "color": "Brown Tabby",
-    "spayedNeutered": "Yes",
-    "age": "3",
-    "id": "45893",
-    "microchipNumber": "982000364789316",
-    "datePosted": "2024-02-02",
-    "status": [
-      "Health checked",
-      "Vaccinations up to date",
-      "Regularly dewormed",
-      "Microchiped"
-    ],
-    "bio": "Say hello to Sol, a gentle and affectionate Maine Coon with a luxurious coat and a love for cuddles. Sol was found as a stray but quickly adapted to indoor life. She enjoys perching by the window, watching birds, and playing with feather toys. Sol is friendly with other cats and adores human companionship. He would thrive in a home where he gets plenty of attention and cozy spots to nap."
-  },
-  {
     "name": "May",
     "pic": "assets/images/goldRetriver.webp",
     "breed": "Golden Retriever",
@@ -415,5 +395,39 @@
       "Healthy, Joe, Mama"
     ],
     "bio": "Joe is yo mama"
+  },
+  {
+    "name": "dasd",
+    "pic": "asd",
+    "breed": "asd",
+    "type": "asd",
+    "sex": "Male",
+    "color": "asd",
+    "spayedNeutered": "on",
+    "age": "asd",
+    "id": 23648908,
+    "microchipNumber": "asd",
+    "datePosted": "2025-04-08T17:37:26.775Z",
+    "status": [
+      "asd"
+    ],
+    "bio": "asd"
+  },
+  {
+    "name": "asd",
+    "pic": "ads",
+    "breed": "asd",
+    "type": "asd",
+    "sex": "Female",
+    "color": "asd",
+    "spayedNeutered": "on",
+    "age": "asd",
+    "id": 23648909,
+    "microchipNumber": "asd",
+    "datePosted": "2025-04-08T17:37:58.426Z",
+    "status": [
+      "asd"
+    ],
+    "bio": "asd"
   }
 ]
