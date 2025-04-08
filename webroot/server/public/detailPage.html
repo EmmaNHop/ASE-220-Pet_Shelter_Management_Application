@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="auto">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
-    <meta name="author" content="" />
+    <meta name="author" content="Nate Brewer, Danny Poff, Emma Hopkins" />
     <title>Pet page</title>
 
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="assets/css/detailStyles.css" rel="stylesheet" />
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/album/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
-
-    <!--<script src="assets/js/color-modes.js"></script>-->
-    <!--<script type="text/javascript" src="./assets/js/pets.js"></script>-->
 </head>
 
 <body data-bs-theme="dark">
@@ -108,46 +107,79 @@
                 </div>
             </div>
         </div>
-
-    <!--edit Pet Modal-->
-    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Pet Information</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- New Pet input -->
-                    <form id="myForm">
-                        <div class="row">
-                            <div class="col-6">
-                                <input class="form-control m-1" type="text" id="form-name" name="name" placeholder="Enter name" />
-                                <input class="form-control m-1" type="text" id="form-breed" name="breed" placeholder="Enter Breed" />
-                                <input class="form-control m-1" type="text" id="form-type" name="type" placeholder="Enter type of animal" />
-                                <input class="form-control m-1" type="text" id="form-sex" name="sex" placeholder="Enter the animal's sex" />
+        <!--edit Pet Modal-->
+        <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Pet Information</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- New Pet input -->
+                        <form id="myForm">
+                            <div class="row">
+                                <div class="col-6">
+                                    <input class="form-control m-1" type="text" id="form-name" name="name" placeholder="Enter name" />
+                                    <input class="form-control m-1" type="text" id="form-breed" name="breed" placeholder="Enter Breed" />
+                                    <input class="form-control m-1" type="text" id="form-type" name="type" placeholder="Enter type of animal" />
+                                    <input class="form-control m-1" type="text" name="color" placeholder="Enter animal's color" />
+                                    <div class="row">
+                                        <div class="col-2">
+                                            Sex:
+                                        </div>
+                                        <div class="col-2">
+                                            <input class="form-check-input" type="radio" name="sex" id="sexMale" value="Male"/>
+                                            <label class="form-check-label" for="sexMale">Male</label>
+                                        </div>
+                                        <div class="col-3">
+                                            <input class="form-check-input" type="radio" name="sex" id="sexFemale" value="Female"/>
+                                            <label class="form-check-label" for="sexFemale">Female</label>
+                                        </div>
+                                        <div class="col-5">
+                                            <input class="form-check-input" type="radio" name="sex" id="sexUnknown" value="Unknown"/>
+                                            <label class="form-check-label" for="sexUnknown">Unknown</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control m-1" type="text" id="form-color" name="color" placeholder="Enter animal's color" />
+                                    <input class="form-control m-1" type="text" id="form-microchip" name="microchip" placeholder="Enter microchip number" />
+                                    <input class="form-control m-1" type="text" id="form-age" name="age" placeholder="Enter age" />
+                                    <div class="row">
+                                        <div class="col-3">
+                                            Fixed:
+                                        </div>
+                                        <div class="col-2">
+                                            <input class="form-check-input" type="radio" name="fixed" id="fixedYes">
+                                            <label class="form-check-label" name="fixed">Yes</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input class="form-check-input" type="radio" name="fixed" id="fixedNo">
+                                            <label class="form-check-label" name="fixed">No</label>
+                                        </div>
+                                        <div class="col-4">
+                                            <input class="form-check-input" type="radio" name="fixed" id="unknown">
+                                            <label class="form-check-label" name="fixed">Unknown</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-6">
-                                <input class="form-control m-1" type="text" id="form-color" name="color" placeholder="Enter animal's color" />
-                                <input class="form-control m-1" type="text" id="form-fixed" name="fixed" placeholder="Answer Yes or No for Spayed/Neutered" />
-                                <input class="form-control m-1" type="text" id="form-age" name="age" placeholder="Enter age" />
-                                <input class="form-control m-1" type="text" id="form-microchip" name="microchip" placeholder="Enter microchip number" />
-                            </div>
-                        </div>
-                        <input class="form-control m-1" type="text" id="form-picture" name="picture" placeholder="Enter Picture URL" />
-                        <textarea class="form-control m-1" type="text" id="form-status" name="status" placeholder="Enter status" rows="3"></textarea>
-                        <textarea class="form-control m-1" type="textarea" id="form-bio" name="bio" placeholder="Enter bio" rows="8"></textarea>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <!--save info into pets.js, will have to add id and data ourselves. Status may need to be broken up somehow-->
-                    <button id="submit" type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                            <input class="form-control m-1" type="text" id="form-picture" name="picture" placeholder="Enter Picture URL" />
+                            <textarea class="form-control m-1" type="text" id="form-status" name="status" placeholder="Enter status" rows="3"></textarea>
+                            <textarea class="form-control m-1" type="textarea" id="form-bio" name="bio" placeholder="Enter bio" rows="8"></textarea>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <!--save info into pets.js, will have to add id and data ourselves. Status may need to be broken up somehow-->
+                        <button id="submit" type="button" class="btn btn-primary" data-bs-dismiss="modal">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+    </main>
+
     <!-- Footer-->
     <div class="py-5 bg-dark text-white">
         <div class="d-flex justify-content-center container">
@@ -203,9 +235,17 @@
             document.getElementById("breed").innerHTML = petBreed;
             document.getElementById("bio").innerHTML = petBio;
             document.getElementById("sex").innerHTML = petSex;
+            // Pre checks the edit radio button
+            document.getElementById(`sex${petSex}`).checked = true;
+            
             document.getElementById("age").innerHTML = petAge;
             document.getElementById("color").innerHTML = petColor;
+
+            // Pre checks the spayed/neutered
             document.getElementById("sn").innerHTML = petSN;
+            document.getElementById(`fixed${petSN}`).checked = true;
+
+
             for (let i = 0; i < petStat.length-1; i++) {
                 document.getElementById("stat").innerHTML += petStat[i] + "<br>";
             }
@@ -228,9 +268,9 @@
             document.getElementById("form-picture").value = document.getElementById("picture").src; //assuming
             document.getElementById("form-breed").value = document.getElementById("breed").innerHTML;
             document.getElementById("form-type").value = document.getElementById("type").innerHTML;
-            document.getElementById("form-sex").value = document.getElementById("sex").innerHTML;
+            //document.getElementById("form-sex").value = document.getElementById("sex").innerHTML;
             document.getElementById("form-color").value = document.getElementById("color").innerHTML;
-            document.getElementById("form-fixed").value = document.getElementById("sn").innerHTML;
+            //document.getElementById("form-fixed").value = document.getElementById("sn").innerHTML;
             document.getElementById("form-age").value = document.getElementById("age").innerHTML;  
 
             document.getElementById("form-status").value = `${stat}`; 
