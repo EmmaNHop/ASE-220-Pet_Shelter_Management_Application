@@ -97,13 +97,14 @@ exports.getPetType = async (type) => {
 
     petArr.forEach(pet => {
         let petType = pet.type;
-        let petTypeLower = petType.toLowerCase();
+        let petTypeLower = petType;
         if(petTypeLower === type){
-            console.log(true);
             parsedType.push(pet);
+            return;
         }
     });
 
+    //console.log(parsedType);
     return parsedType;
     
 }
@@ -112,17 +113,19 @@ exports.getPetType = async (type) => {
 exports.getPetById = async (id) => {
 
     const petArr = await exports.getPets();
-
-    let parsedId = [];
     console.log(id)
 
+    var parsedPet;
+
     petArr.forEach(pet => {
-        console.log(pet);
+        //console.log(pet);
         if(pet.id === id){
-            console.log(true);
-            parsedId.push(pet);
-            return parsedType;
+            console.log(pet);
+            parsedPet = pet;
+            return; //
         }
     });
+
+    return parsedPet;
     
 }

@@ -121,20 +121,20 @@
                 <div class="modal-body">
                     <!-- New Pet input -->
                     <form id="myForm">
-                        <input class="form-control m-1" type="text" name="name" placeholder="Enter name" />
-                        <input class="form-control m-1" type="text" name="picture" placeholder="Enter Picture URL" />
-                        <input class="form-control m-1" type="text" name="breed" placeholder="Enter Breed" />
-                        <input class="form-control m-1" type="text" name="animal" placeholder="Enter type of animal" />
-                        <input class="form-control m-1" type="text" name="gender"
+                        <input class="form-control m-1" type="text" id="form-name" name="name" placeholder="Enter name" />
+                        <input class="form-control m-1" type="text" id="form-picture" name="picture" placeholder="Enter Picture URL" />
+                        <input class="form-control m-1" type="text" id="form-breed" name="breed" placeholder="Enter Breed" />
+                        <input class="form-control m-1" type="text" id="form-type" name="type" placeholder="Enter type of animal" />
+                        <input class="form-control m-1" type="text" id="form-sex" name="sex"
                             placeholder="Enter the animal's sex" />
-                        <input class="form-control m-1" type="text" name="color" placeholder="Enter animal's color" />
-                        <input class="form-control m-1" type="text" name="fixed"
+                        <input class="form-control m-1" type="text" id="form-color" name="color" placeholder="Enter animal's color" />
+                        <input class="form-control m-1" type="text" id="form-fixed" name="fixed"
                             placeholder="Answer Yes or No for Spayed/Neutered" />
-                        <input class="form-control m-1" type="text" name="age" placeholder="Enter age" />
-                        <input class="form-control m-1" type="text" name="microchip"
+                        <input class="form-control m-1" type="text" id="form-age" name="age" placeholder="Enter age" />
+                        <input class="form-control m-1" type="text" id="form-microchip" name="microchip"
                             placeholder="Enter microchip number" />
-                        <input class="form-control m-1" type="text" name="status" placeholder="Enter status" />
-                        <input class="form-control m-1" type="text" name="bio" placeholder="Enter bio" />
+                        <input class="form-control m-1" type="text" id="form-status" name="status" placeholder="Enter status" />
+                        <input class="form-control m-1" type="text" id="form-bio" name="bio" placeholder="Enter bio" />
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -166,25 +166,25 @@
         const urlParams = new URLSearchParams(window.location.search);
         const myParam = urlParams.get('id');
 
-        async function fetchPets() {
-            let pet = await axios.get('http://127.0.0.1:3000/api/pets');
+        async function fetchPet() {
+            let pet = await axios.get(`http://127.0.0.1:3000/api/pets/${myParam}`);
             //console.log(pet.data);
             return pet.data;
         }
 
-        async function loadPet(pets) {
-            // Just to help expedite the process for ya
-            let petName = pets[myParam].name;
-            let petType = pets[myParam].type;
-            let petBreed = pets[myParam].breed;
-            let petSex = pets[myParam].sex;
-            let petAge = pets[myParam].age;
-            let petColor = pets[myParam].color;
-            let petBio = pets[myParam].bio;
-            let petPic = pets[myParam].pic;
-            let petSN = pets[myParam].spayedNeutered;
-            let petStat = pets[myParam].status;
-            let petDate = pets[myParam].datePosted;
+        async function loadPet(pet) {
+
+            let petName = pet.name;
+            let petType = pet.type;
+            let petBreed = pet.breed;
+            let petSex = pet.sex;
+            let petAge = pet.age;
+            let petColor = pet.color;
+            let petBio = pet.bio;
+            let petPic = pet.pic;
+            let petSN = pet.sprayedNeutered;
+            let petStat = pet.status;
+            let petDate = pet.datePosted;
 
 
             var img = document.createElement("img");
@@ -208,29 +208,55 @@
             }
         }
 
-        async function loadEditModal(pets) {
+        async function loadEditModal() {
+            console.log(document.getElementById("name").innerHTML);
+
             let stat = "";
-            for (let i = 0; i < pets[myParam].status.length; i++) {
-                stat += pets[myParam].status[i] + ";";
+            let statContent = document.getElementById("stat").childNodes;
+            for (let i = 0; i < statContent.length; i++) {
+                if(statContent[i].localName == "br"){    
+                } else {
+                    stat += statContent[i].data + ", ";
+                }
+                //stat += pet.status[i] + ";";
             }
+            /*
             document.getElementById("myForm").innerHTML = 
-            `<input class="form-control m-1" type="text" name="name" placeholder="${pets[myParam].name}" />
-            <input class="form-control m-1" type="text" name="picture" placeholder="${pets[myParam].pic}" />
-            <input class="form-control m-1" type="text" name="breed" placeholder="${pets[myParam].breed}" />
-            <input class="form-control m-1" type="text" name="animal" placeholder="${pets[myParam].type}" />
-            <input class="form-control m-1" type="text" name="gender" placeholder="${pets[myParam].sex}" />
-            <input class="form-control m-1" type="text" name="color" placeholder="${pets[myParam].color}" />
-            <input class="form-control m-1" type="text" name="fixed" placeholder="${pets[myParam].spayedNeutered}" />
-            <input class="form-control m-1" type="text" name="age" placeholder="${pets[myParam].age}" />
-            <input class="form-control m-1" type="text" name="microchip" placeholder="${pets[myParam].microchipNumber}" />
-            <input class="form-control m-1" type="text" name="status" placeholder="${stat}" />
-            <input class="form-control m-1" type="text" name="bio" placeholder="${pets[myParam].bio}" />`
+                `<input class="form-control m-1" type="text" name="name" placeholder="${document.getElementById("name").innerHTML}" />
+                <input class="form-control m-1" type="text" name="breed" placeholder="${document.getElementById("breed").innerHTML}" />
+                <input class="form-control m-1" type="text" name="animal" placeholder="${document.getElementById("type").innerHTML}" />
+                <input class="form-control m-1" type="text" name="gender" placeholder="${document.getElementById("sex").innerHTML}" />
+                <input class="form-control m-1" type="text" name="color" placeholder="${document.getElementById("color").innerHTML}" />
+                <input class="form-control m-1" type="text" name="fixed" placeholder="${document.getElementById("sn").innerHTML}" />
+                <input class="form-control m-1" type="text" name="age" placeholder="${document.getElementById("age").innerHTML}" />
+                <input class="form-control m-1" type="text" name="status" placeholder="${stat}" />
+                <input class="form-control m-1" type="text" name="bio" placeholder="${document.getElementById("bio").innerHTML}" />`;
+        */
+
+
+document.getElementById("form-name").value = document.getElementById("name").innerHTML; 
+document.getElementById("form-picture").value = document.getElementById("picture").innerHTML;
+document.getElementById("form-breed").value = document.getElementById("breed").innerHTML;
+document.getElementById("form-type").value = document.getElementById("type").innerHTML;
+document.getElementById("form-sex").value = document.getElementById("sex").innerHTML;
+document.getElementById("form-color").value = document.getElementById("color").innerHTML;
+document.getElementById("form-fixed").value = document.getElementById("sn").innerHTML;
+document.getElementById("form-age").value = document.getElementById("age").innerHTML;       
+document.getElementById("form-bio").value = document.getElementById("bio").innerHTML;     
+document.getElementById("form-bio").value = "${stat}";  
+
+
+console.log(document.getElementById("form-name").innerText);
+
         }
 
-        fetchPets().then((pets) => { loadPet(pets); });
-        fetchPets().then((pets) => { loadEditModal(pets); });
+        fetchPet().then((pet) => { loadPet(pet); });
 
-        // Function to handle editing a pet
+        document.getElementById('edit').addEventListener('click', function() {
+            loadEditModal();
+        })
+
+        /* Function to handle editing a pet /*
         document.getElementById('edit').addEventListener('click', function () {
             const petID = document.querySelector('#petName').getAttribute('data-id'); // Assuming petName has a data-id attribute
             const updatedPet = {
@@ -257,6 +283,7 @@
                 });
         });
 
+        */
 
     </script>
     <!-- Bootstrap core JS-->

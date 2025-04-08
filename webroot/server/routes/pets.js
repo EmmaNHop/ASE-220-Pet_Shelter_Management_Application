@@ -23,18 +23,20 @@ router.get('/', async (req, res) => {
     try{
         if(type){
         
-            content = await petHandler.getPetType(type);
-            res.send(content);
+            console.log(type);
 
+            content = await petHandler.getPetType(type);
             // If the type isnt available then return 4040
             if (!content){
                 return res.status(404).json({ error: `Type :${type} not found`});
             }
+            console.log(content);
+            res.status(200).send(content);
 
         } else{
             content = await petHandler.getPets();
             //console.log(content); 
-            res.send(await petHandler.getPets());
+            res.status(200).send(await petHandler.getPets());
         } 
     }catch(error){
             console.error(error);
@@ -112,8 +114,10 @@ router.get('/:id', async (req, res) => {
     console.log(req.params.id);
     try{
         let pet = await petHandler.getPetById(req.params.id);
-        res.status.json(pet);
+        console.log(pet);
+        res.status(201).json(pet);
     } catch (error){
+        console.error(error);
         res.status(500).json({error : 'Failed to get pet'});
     }
 });
