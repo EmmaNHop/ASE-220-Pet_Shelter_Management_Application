@@ -338,6 +338,7 @@
             let petSN = pets.spayedNeutered;
             let petStat = pets.status;
             let petDate = pets.datePosted;
+            let micro = pets.microchipNumber;
 
             var img = document.createElement("img");
             img.src = petPic;
@@ -355,6 +356,8 @@
             document.getElementById("age").innerHTML = petAge;
             document.getElementById("color").innerHTML = petColor;
             document.getElementById("sn").innerHTML = petSN;
+            document.getElementById("microchip").innerHTML = micro;
+
             for (let i = 0; i < petStat.length; i++) {
                 document.getElementById("stat").innerHTML += petStat[i] + "<br>";
             }
