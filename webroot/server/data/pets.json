@@ -1,23 +1,20 @@
 [
   {
-    "name": "Shelly",
-    "pic": "assets/images/turt.webp",
-    "breed": "Russian Tortoise",
-    "type": "Tortoise",
+    "name": "Betty",
+    "pic": "http://127.0.0.1:3000/assets/images/turt.webp",
+    "breed": "Box Turtle",
+    "type": "Turtle",
     "sex": "Female",
-    "color": "Brown and Yellow Shell",
-    "spayedNeutered": "N/A",
-    "age": "10",
+    "color": "brown",
+    "spayedNeutered": "on",
+    "age": "17",
     "id": "90241",
     "microchipNumber": "982000364789987",
-    "datePosted": "2024-01-05",
+    "datePosted": "2025-04-09T01:16:21.322Z",
     "status": [
-      "Health checked",
-      "Vaccinations up to date",
-      "Regularly dewormed",
-      "Microchiped"
+      "Health checked, Vaccinations up to date, Regularly dewormed, Microchiped, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined"
     ],
-    "bio": "Say hello to Shelly, a calm and easygoing Russian Tortoise who loves basking in the sun. Shelly was rehomed when her previous owner moved and couldn’t take her along. She enjoys munching on leafy greens and digging in her enclosure. With proper care, Shelly could live for many more years and would love a dedicated owner who understands her needs."
+    "bio": "Say hello to Shelly, a calm and easygoing Box Turtle who loves basking in the sun. Shelly was rehomed when her previous owner moved and couldn’t take her along. She enjoys munching on leafy greens and digging in her enclosure. With proper care, Shelly could live for many more years and would love a dedicated owner who understands her needs."
   },
   {
     "name": "Luna",
