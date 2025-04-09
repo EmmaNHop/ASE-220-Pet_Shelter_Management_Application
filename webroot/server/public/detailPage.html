@@ -136,15 +136,15 @@
                                             Sex:
                                         </div>
                                         <div class="col-2">
-                                            <input class="form-check-input" type="radio" name="sex" id="sexMale" value="Male"/>
+                                            <input class="form-check-input" type="radio" name="gender" id="sexMale" value="Male"/>
                                             <label class="form-check-label" for="sexMale">Male</label>
                                         </div>
                                         <div class="col-3">
-                                            <input class="form-check-input" type="radio" name="sex" id="sexFemale" value="Female"/>
+                                            <input class="form-check-input" type="radio" name="gender" id="sexFemale" value="Female"/>
                                             <label class="form-check-label" for="sexFemale">Female</label>
                                         </div>
                                         <div class="col-5">
-                                            <input class="form-check-input" type="radio" name="sex" id="sexUnknown" value="Unknown"/>
+                                            <input class="form-check-input" type="radio" name="gender" id="sexUnknown" value="Unknown"/>
                                             <label class="form-check-label" for="sexUnknown">Unknown</label>
                                         </div>
                                     </div>
@@ -213,7 +213,7 @@
         }
 
 
-
+        
         async function loadPet(pet) {
 
             let petName = pet.name;
@@ -258,8 +258,11 @@
             document.getElementById("stat").innerHTML += petStat[petStat.length-1];
         }
 
+
+        //load data into the modal
         async function loadEditModal() {
 
+            console.log(pet[myParam]);
             var stat = "";
             let statContent = document.getElementById("stat").childNodes;
             for (let i = 0; i < statContent.length-1; i++) {
@@ -285,21 +288,76 @@
 
         }
 
+
+        const form = document.getElementById("myForm"); // Correctly reference the form with id "myForm"
         // Function to handle editing a pet
-        document.getElementById("edit").addEventListener("click", function () {
+        document.getElementById("submit").addEventListener("click", function () {
             const petID = myParam; // Using the 'id' query parameter from the URL as the pet ID
+
+            const name = form.elements["name"].value;
+            const breed = form.elements["breed"].value;
+            const type =form.elements["type"].value;
+            const gender = form.elements["gender"].value;
+            const color = form.elements["color"].value;
+            const fixed = form.elements["fixed"].value;
+            const age = form.elements["age"].value;
+            const bio = form.elements["bio"].value;
+            const microchip = form.elements["microchip"].value;
+            const status = form.elements["status"].value;
+            
+            if(name == ''){
+                name == pet.name;
+            }else if(breed == ''){
+                breed = pet.breed;
+            }else if(type == ''){
+                type == petType;
+            }else if(gender == ''){
+                gender == petSex;
+            }else if(color == ''){
+                color == petColor;
+            }else if(fixed == ''){
+                fixed == petSN;
+            }else if(age == ''){
+                age == petAge;
+            }else if(bio == ''){
+                bio == petBio;
+            }else if(microchip == ''){
+                microchip == petMicrochip;
+            }else if(status == ''){
+                status == petStat;
+            }
+
+            let petName = pet.name;
+            let petType = pet.type;
+            let petBreed = pet.breed;
+            let petSex = pet.sex;
+            let petAge = pet.age;
+            let petColor = pet.color;
+            let petBio = pet.bio;
+            let petPic = pet.pic;
+            let petSN = pet.spayedNeutered;
+            let petStat = pet.status;
+            let petDate = pet.datePosted;
+
+
             const updatedPet = {
-                name: form.elements.name.value,
-                picture: form.elements.picture.value,
-                breed: form.elements.breed.value,
-                animal: form.elements.animal.value,
-                gender: form.elements.gender.value,
-                color: form.elements.color.value,
-                fixed: form.elements.fixed.value,
-                age: form.elements.age.value,
-                microchip: form.elements.microchip.value,
-                bio: form.elements.bio.value,
+                "name": name,
+                "breed": breed,
+                "type": type,
+                "sex": gender,
+                "color": color,
+                "spayedNeutered": fixed,
+                "age": age,
+                "id": petID,
+                "microchipNumber": microchip,
+                "datePosted": new Date(),
+                "status": [
+                    status
+                ],
+                "bio": bio
             };
+            
+            console.log(updatedPet);
 
             axios
                 .put(`http://127.0.0.1:3000/api/pets/${petID}`, updatedPet)
@@ -313,24 +371,27 @@
         });
 
         async function fetchPets() {
-            let pet = await axios.get("http://127.0.0.1:3000/api/pets");
-            //console.log(pet.data);
+            let pet = await axios.get(`http://127.0.0.1:3000/api/pets/${myParam}`);
+            console.log(pet.data);
             return pet.data;
         }
 
+
+        //loads pets
+
         async function loadPet(pets) {
             // Just to help expedite the process for ya
-            let petName = pets[myParam].name;
-            let petType = pets[myParam].type;
-            let petBreed = pets[myParam].breed;
-            let petSex = pets[myParam].sex;
-            let petAge = pets[myParam].age;
-            let petColor = pets[myParam].color;
-            let petBio = pets[myParam].bio;
-            let petPic = pets[myParam].pic;
-            let petSN = pets[myParam].spayedNeutered;
-            let petStat = pets[myParam].status;
-            let petDate = pets[myParam].datePosted;
+            let petName = pets.name;
+            let petType = pets.type;
+            let petBreed = pets.breed;
+            let petSex = pets.sex;
+            let petAge = pets.age;
+            let petColor = pets.color;
+            let petBio = pets.bio;
+            let petPic = pets.pic;
+            let petSN = pets.spayedNeutered;
+            let petStat = pets.status;
+            let petDate = pets.datePosted;
 
             var img = document.createElement("img");
             img.src = petPic;
@@ -356,16 +417,16 @@
         fetchPets().then((pets) => {
             loadPet(pets);
         });
-        const form = document.getElementById("editForm"); // Define the form variable
+    /*    const form = document.getElementById("myForm"); // Correctly reference the form with id "myForm"
 
         // Function to handle editing a pet
-        document.getElementById("edit").addEventListener("click", function () {
+        document.getElementById("submit").addEventListener("click", function () {
             const petID = myParam; // Using the 'id' query parameter from the URL as the pet ID
 
             const inputName = form.elements.name.value;
             const inputPic = form.elements.picture.value;
             const inputBreed = form.elements.breed.value;
-            const inputAnimal = form.elements.animal.value;
+            const inputAnimal = form.elements.type.value;
             const inputGender = form.elements.gender.value;
             const inputColor = form.elements.color.value;
             const inputFixed = form.elements.fixed.value;
@@ -398,13 +459,16 @@
 
             form.reset();
 
-            if (loaded >= petList.length - 2) {
-                console.log("LOAD");
-                document.querySelector("#petThumbnail").innerHTML += load();
+            let loaded = 0; // Initialize the variable
+            if (loaded === 0) {
+                fetchPets().then((pet) => {
+                    loadPet(pet);
+                    loaded++; // Increment the loaded counter to ensure it only loads once
+                });
             }
         });
 
-        /*      async function loadEditModal(pets) {
+             async function loadEditModal(pets) {
                     let stat = "";
                     for (let i = 0; i < pets[myParam].status.length; i++) {
                         stat += pets[myParam].status[i] + ";";
